@@ -1,0 +1,1437 @@
+{
+    "type": "FeatureCollection",
+    "name": "Fərdi yaşayış evi",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu, İzmir küçəsi, ev 12",
+                "Project": "İzmir Villas",
+                "City": "Bakı şəhəri",
+                "Street": "İzmir küçəsi, ev 12",
+                "Valuation_": "Digər",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 10908543.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararlı",
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Əlavə",
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": "Paşa Property Management MMC",
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "Mülkiyyət",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Xüsusi",
+                "Total_area": 3321.4,
+                "Rent_area_": 2206.0,
+                "Land_area_": 0.6503,
+                "Registra_0": "011013001929-10301",
+                "Registra_2": "1121101967",
+                "Serial_num": null,
+                "Registra_4": "011013001929-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000299",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((400131.75 4471706,400198 4471720.5,400214.5 4471647.75,400235 4471649.5,400247.75 4471613.25,400159 4471599,400131.75 4471706))",
+                "Kordinat": "No",
+                "guid": "5a638306-3b40-45c0-8e88-f4fd41ebd2b7"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.823322805820673,
+                                40.389969172303033
+                            ],
+                            [
+                                49.824100955074591,
+                                40.390107717635999
+                            ],
+                            [
+                                49.824306721108677,
+                                40.389454413633494
+                            ],
+                            [
+                                49.824547934044368,
+                                40.389472631661157
+                            ],
+                            [
+                                49.824703803918723,
+                                40.389147643998662
+                            ],
+                            [
+                                49.823660580240109,
+                                40.389008658433461
+                            ],
+                            [
+                                49.823322805820673,
+                                40.389969172303033
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Səbail rayonu, Asəf Zeynallı küçəsi, ev 7.10",
+                "Project": "Yaşayış - Villa (Asəf Zeynallı 7/10)",
+                "City": "Bakı şəhəri",
+                "Street": "Asəf Zeynallı küçəsi, ev 7.10",
+                "Valuation_": null,
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 1899071.8,
+                "Use_type": "İcarə",
+                "Status_of_": null,
+                "Unuseful_f": "Arayış",
+                "Ownership_": "Tam",
+                "Status": null,
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 178.3,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.0111,
+                "Registra_0": "004011000191-10301",
+                "Registra_2": "1121154345",
+                "Serial_num": null,
+                "Registra_4": "004011000191-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000209",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((400967.902402263 4468830.388377788,400963.7734792422 4468837.922774655,400966.0055238545 4468842.114783942,400974.32151979103 4468847.794687443,400976.5535144927 4468844.548703644,400975.67446789105 4468843.733301156,400979.59548649006 4468838.8",
+                "Kordinat": "Yes",
+                "guid": "582e0d5a-a8b7-4b46-bfe6-5de8edaa60bf"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.833619446767777,
+                                40.364167374129856
+                            ],
+                            [
+                                49.833569656744835,
+                                40.364234748771608
+                            ],
+                            [
+                                49.833595289273148,
+                                40.364272772833864
+                            ],
+                            [
+                                49.833692332476666,
+                                40.364324921472907
+                            ],
+                            [
+                                49.833719119340124,
+                                40.364295948794911
+                            ],
+                            [
+                                49.833708894715564,
+                                40.364288499770872
+                            ],
+                            [
+                                49.833755821807692,
+                                40.364245157427007
+                            ],
+                            [
+                                49.833619446767777,
+                                40.364167374129856
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Nizami rayonu, 808-ci keçid, 8-ci km. qəsəbəsi, korpus 15, ev 15",
+                "Project": "Yaşayış –Villa 11,13,15(8-ci km qəs, 808-ci keçid)",
+                "City": "Bakı şəhəri",
+                "Street": "808-ci keçid, 8-ci km. qəsəbəsi, korpus 15, ev 15",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": null,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararlı",
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Satış",
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 358.1,
+                "Rent_area_": 416.2,
+                "Land_area_": 0.02318,
+                "Registra_0": "009011000199-10301",
+                "Registra_2": "1121151784",
+                "Serial_num": null,
+                "Registra_4": "009011000199-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000466",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((410769.5632 4475035.1261,410742.4925 4475019.1242,410736.8325 4475044.3798,410738.1025 4475050.2536,410739.3725 4475054.2224,410761.5976 4475061.6837,410764.1376 4475061.0486,410769.5632 4475035.1261))",
+                "Kordinat": "Yes",
+                "guid": "7ccae545-51bc-4c55-a3ba-cade0ac9469e"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.948172715565164,
+                                40.421164172168901
+                            ],
+                            [
+                                49.947855909415935,
+                                40.421017129795842
+                            ],
+                            [
+                                49.947785656681042,
+                                40.421244015581038
+                            ],
+                            [
+                                49.947799800338792,
+                                40.421297060789165
+                            ],
+                            [
+                                49.947814211393919,
+                                40.421332946474315
+                            ],
+                            [
+                                49.948075107415541,
+                                40.421402538822626
+                            ],
+                            [
+                                49.948105132769477,
+                                40.421397090473398
+                            ],
+                            [
+                                49.948172715565164,
+                                40.421164172168901
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Nizami rayonu, 808-ci keçid, 8-ci km. qəsəbəsi, korpus 15, ev 13",
+                "Project": "Yaşayış –Villa 11,13,15(8-ci km qəs, 808-ci keçid)",
+                "City": "Bakı şəhəri",
+                "Street": "808-ci keçid, 8-ci km. qəsəbəsi, korpus 15, ev 13",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": null,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararlı",
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Satış",
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 268.7,
+                "Rent_area_": 326.4,
+                "Land_area_": 0.0183,
+                "Registra_0": "009011000201-10301",
+                "Registra_2": "1121151688",
+                "Serial_num": null,
+                "Registra_4": "009011000201-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000468",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((410769.5632 4475035.1261,410795.7641 4475048.0767,410805.1077 4475030.7438,410787.0328 4475010.7703,410769.5632 4475035.1261))",
+                "Kordinat": "Yes",
+                "guid": "529ce319-5ee0-4534-80e8-e338feeb856e"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.948172715565164,
+                                40.421164172168901
+                            ],
+                            [
+                                49.948479699717964,
+                                40.421283635479355
+                            ],
+                            [
+                                49.948592253419712,
+                                40.421128508807065
+                            ],
+                            [
+                                49.948382026757621,
+                                40.420946657383233
+                            ],
+                            [
+                                49.948172715565164,
+                                40.421164172168901
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Səbail rayonu, Bibi-Heybət qəsəbəsi, Səlyan şossesi, 10-cu km., ev 5",
+                "Project": "Yaşayış Villa (Salyan şos 14km) -Xəzri Dənizkənarı",
+                "City": "Bakı şəhəri",
+                "Street": "Bibi-Heybət qəsəbəsi, Səlyan şossesi, 10-cu km., ev 5",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 3944999.9999999995,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararlı",
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": "Facility Management Group MMC",
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 2400.4,
+                "Rent_area_": 2212.0,
+                "Land_area_": 0.1496,
+                "Registra_0": "004011003794-10301",
+                "Registra_2": "1121154191",
+                "Serial_num": null,
+                "Registra_4": "004011003794-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000469",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((398885.72568334255 4462395.162068243,398894.87223266996 4462392.381593062,398909.0692221697 4462386.973424747,398920.7944654695 4462381.839420458,398948.26221513236 4462365.444428794,398986.49543333694 4462336.036719506,398996.37353534583 446232",
+                "Kordinat": "Yes",
+                "guid": "209c75e8-2a37-4b4f-b13d-826e7d2af3d9"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.810119671648778,
+                                40.305953257175425
+                            ],
+                            [
+                                49.810227722807781,
+                                40.305929319250886
+                            ],
+                            [
+                                49.810395608951225,
+                                40.305882323674531
+                            ],
+                            [
+                                49.810534370814857,
+                                40.305837498327435
+                            ],
+                            [
+                                49.810860125988015,
+                                40.305693144929386
+                            ],
+                            [
+                                49.811314592673405,
+                                40.305432881653239
+                            ],
+                            [
+                                49.811432563029783,
+                                40.305334097079836
+                            ],
+                            [
+                                49.811688647564452,
+                                40.305060180440336
+                            ],
+                            [
+                                49.811799693706618,
+                                40.304910818913022
+                            ],
+                            [
+                                49.811907454709775,
+                                40.30474012607948
+                            ],
+                            [
+                                49.812470220489196,
+                                40.303661192732982
+                            ],
+                            [
+                                49.811767168405119,
+                                40.303406120030765
+                            ],
+                            [
+                                49.810714436316921,
+                                40.30359289369882
+                            ],
+                            [
+                                49.810452836126409,
+                                40.304172765683113
+                            ],
+                            [
+                                49.809715986726395,
+                                40.304173450757403
+                            ],
+                            [
+                                49.809877254082828,
+                                40.304529070516999
+                            ],
+                            [
+                                49.810061320681186,
+                                40.30578739800476
+                            ],
+                            [
+                                49.810119671648778,
+                                40.305953257175425
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Nizami rayonu, 808-ci keçid, 8-ci km. qəsəbəsi, korpus 15, ev 11",
+                "Project": "Yaşayış –Villa 11,13,15(8-ci km qəs, 808-ci keçid)",
+                "City": "Bakı şəhəri",
+                "Street": "808-ci keçid, 8-ci km. qəsəbəsi, korpus 15, ev 11",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": null,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararlı",
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Satış",
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 358.1,
+                "Rent_area_": 416.2,
+                "Land_area_": 0.0232,
+                "Registra_0": "009011000202-10301",
+                "Registra_2": "1121151774",
+                "Serial_num": null,
+                "Registra_4": "009011000202-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000467",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((410745.7578 4474981.8778,410757.8228 4475003.1503,410777.5078 4474991.0854,410777.5078 4474963.4628,410745.7578 4474981.8778))",
+                "Kordinat": "Yes",
+                "guid": "48571a88-8059-49e7-86f7-a2191e7703c7"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.947899620971697,
+                                40.420681978487629
+                            ],
+                            [
+                                49.948038831587951,
+                                40.42087488716308
+                            ],
+                            [
+                                49.948272528235741,
+                                40.420768321959713
+                            ],
+                            [
+                                49.948276403410318,
+                                40.420519507937264
+                            ],
+                            [
+                                49.947899620971697,
+                                40.420681978487629
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu, General Həmidov küçəsi, məhəllə 3161, ev 31",
+                "Project": "Yaşayış – Villa 21(Yas.r, G.Həmidov k,m3161, ev31)",
+                "City": "Bakı şəhəri",
+                "Street": "General Həmidov küçəsi, məhəllə 3161, ev 31",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 2964000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararlı",
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": "Facility Management Group MMC",
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "Mülkiyyət",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Xüsusi",
+                "Total_area": 1341.6,
+                "Rent_area_": 1537.96,
+                "Land_area_": 0.2138,
+                "Registra_0": "011013001923-10301",
+                "Registra_2": "1121153547",
+                "Serial_num": null,
+                "Registra_4": "011013001923-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000470",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((398530.162123904 4472716.69166418,398528.5049054609 4472726.327733753,398527.42622588406 4472737.618087104,398527.3058093208 4472737.599664883,398525.13480466837 4472756.566822242,398521.7071273461 4472779.075822817,398523.479135512 4472778.9297",
+                "Kordinat": "Yes",
+                "guid": "d0714c50-a73e-4662-84dd-8947b4916e9d"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.804295251366383,
+                                40.398879154629967
+                            ],
+                            [
+                                49.80427419126287,
+                                40.398965746847502
+                            ],
+                            [
+                                49.804259683471024,
+                                40.39906731004001
+                            ],
+                            [
+                                49.804258267726141,
+                                40.399067129434705
+                            ],
+                            [
+                                49.804229667164122,
+                                40.399237706134571
+                            ],
+                            [
+                                49.804185696427595,
+                                40.399440031824525
+                            ],
+                            [
+                                49.804206596630998,
+                                40.399438932464257
+                            ],
+                            [
+                                49.804206191490806,
+                                40.399441768088543
+                            ],
+                            [
+                                49.804658018925885,
+                                40.399419413514742
+                            ],
+                            [
+                                49.804732507229247,
+                                40.398929525159133
+                            ],
+                            [
+                                49.804295251366383,
+                                40.398879154629967
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Səbail rayonu, Kiçik Qala küçəsi, ev 104",
+                "Project": "Q-Yaşayış (Kiçik Qala 104)",
+                "City": "Bakı şəhəri",
+                "Street": "Kiçik Qala küçəsi, ev 104",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 991000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararlı",
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Digər",
+                "Rent_opera": "Facility Management Group MMC",
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 215.6,
+                "Rent_area_": 180.4,
+                "Land_area_": 0.0136,
+                "Registra_0": "004011003456-10301",
+                "Registra_2": "1121104046",
+                "Serial_num": null,
+                "Registra_4": "004011003456-10301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000471",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((401039.5 4469263.75,401044.25 4469253.5,401046.75 4469254,401047.5 4469248.5,401043.5 4469248.5,401043.25 4469249.75,401040 4469249.25,401040 4469248.25,401039 4469247.75,401039.25 4469246,401033 4469244.75,401031 4469257,401039.5 4469263.75))",
+                "Kordinat": "Yes",
+                "guid": "7fd4e41e-f15c-4c9a-be03-372cc272cbbb"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.834395296877382,
+                                40.368079320261579
+                            ],
+                            [
+                                49.834452824324245,
+                                40.367987558640323
+                            ],
+                            [
+                                49.834482187131478,
+                                40.367992359056089
+                            ],
+                            [
+                                49.834491872722992,
+                                40.367942907593317
+                            ],
+                            [
+                                49.834444768120314,
+                                40.367942432817074
+                            ],
+                            [
+                                49.834441630103655,
+                                40.367953662343211
+                            ],
+                            [
+                                49.834403435202667,
+                                40.367948772892206
+                            ],
+                            [
+                                49.83440359039097,
+                                40.367939765532078
+                            ],
+                            [
+                                49.83439189183602,
+                                40.367935143150788
+                            ],
+                            [
+                                49.83439510745464,
+                                40.367919409946012
+                            ],
+                            [
+                                49.834321700540336,
+                                40.367907408838583
+                            ],
+                            [
+                                49.834296247021378,
+                                40.368017511575346
+                            ],
+                            [
+                                49.834395296877382,
+                                40.368079320261579
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu, Hənifə Ələsgərov küçəsi, ev 4",
+                "Project": "Qeyri yaşayış sahələri  Gilan",
+                "City": "Bakı şəhəri",
+                "Street": "Hənifə Ələsgərov küçəsi, ev 4",
+                "Valuation_": "Torpaq sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 235000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararsız",
+                "Unuseful_f": "Development",
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Torpaq sahəsi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 219.8,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.01615,
+                "Registra_0": "011011002645-10301",
+                "Registra_2": "1122090566",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000549",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((400306.5 4471602.75,400304.5 4471553.5,400326.5 4471552,400306.5 4471602.75))",
+                "Kordinat": "No",
+                "guid": "6c68273d-7c05-4d35-b9ba-81e4740b32b0"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.825397510708747,
+                                40.389060100021659
+                            ],
+                            [
+                                49.825641047405298,
+                                40.388605372725216
+                            ],
+                            [
+                                49.825381659012194,
+                                40.388616251233245
+                            ],
+                            [
+                                49.825397510708747,
+                                40.389060100021659
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu, Hənifə Ələsgərov küçəsi, ev 3",
+                "Project": "Qeyri yaşayış sahələri  Gilan",
+                "City": "Bakı şəhəri",
+                "Street": "Hənifə Ələsgərov küçəsi, ev 3",
+                "Valuation_": "Torpaq sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 337000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararsız",
+                "Unuseful_f": "Development",
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Torpaq sahəsi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 164.3,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.02317,
+                "Registra_0": "011011000976-10301",
+                "Registra_2": "1122090567",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000548",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((400226.75 4471738.5,400204.75 4471716.25,400219.25 4471657,400240.5 4471647,400251 4471618.5,400266.25 4471609,400256.5 4471597,400247 4471590.25,400269.5 4471556.25,400274.5 4471510.5,400312.25 4471512.75,400320.5 4471502.25,400335.75 4471480.5",
+                "Kordinat": "No",
+                "guid": "2a2282df-513a-4e64-ba92-ec6825ff279a"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.8244368096682,
+                                40.390273292776136
+                            ],
+                            [
+                                49.826547042330063,
+                                40.388335295531967
+                            ],
+                            [
+                                49.825761196047651,
+                                40.387962457386173
+                            ],
+                            [
+                                49.825578153844717,
+                                40.388156541680381
+                            ],
+                            [
+                                49.82547932874882,
+                                40.38825013118695
+                            ],
+                            [
+                                49.825034999280803,
+                                40.388225346791977
+                            ],
+                            [
+                                49.824968938585876,
+                                40.388636832129563
+                            ],
+                            [
+                                49.824698570800514,
+                                40.388940386387382
+                            ],
+                            [
+                                49.824809421654507,
+                                40.38900232311385
+                            ],
+                            [
+                                49.824922395682002,
+                                40.389111577972628
+                            ],
+                            [
+                                49.824741266168878,
+                                40.389195321450458
+                            ],
+                            [
+                                49.824613114791298,
+                                40.389450772067065
+                            ],
+                            [
+                                49.824361226456453,
+                                40.389538300051122
+                            ],
+                            [
+                                49.824181135706738,
+                                40.390070245290183
+                            ],
+                            [
+                                49.8244368096682,
+                                40.390273292776136
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu,Tbilisi prospekti, ev 23",
+                "Project": "Qeyri yaşayış sahələri  Gilan",
+                "City": "Bakı şəhəri",
+                "Street": "Tbilisi prospekti, ev 23",
+                "Valuation_": "Torpaq sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 343000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararsız",
+                "Unuseful_f": "Development",
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Torpaq sahəsi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 163.6,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.02358,
+                "Registra_0": "011011002851-10301",
+                "Registra_2": "1122090574",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000551",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((400337.25 4471539.5,400337 4471511.5,400358.25 4471518,400337.25 4471539.5))",
+                "Kordinat": "No",
+                "guid": "9869c667-45e5-4d48-8d6f-5c7d89a25a2b"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.825769634953701,
+                                40.388494067568217
+                            ],
+                            [
+                                49.826020371491765,
+                                40.388302922554061
+                            ],
+                            [
+                                49.825771070645644,
+                                40.388241833248657
+                            ],
+                            [
+                                49.825769634953701,
+                                40.388494067568217
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu,Yusif Qasımov küçəsi, ev 14",
+                "Project": "Qeyri yaşayış sahələri  Gilan",
+                "City": "Bakı şəhəri",
+                "Street": "Yusif Qasımov küçəsi, ev 14",
+                "Valuation_": "Torpaq sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 474000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararsız",
+                "Unuseful_f": "Development",
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Torpaq sahəsi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 221.3,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.03259,
+                "Registra_0": "011011002296-10301",
+                "Registra_2": "1122090565",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000554",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((400333 4471579.25,400339.5 4471557.25,400358.25 4471565.25,400333 4471579.25))",
+                "Kordinat": "No",
+                "guid": "61de7f09-122a-4005-a87a-3f3c6e2a47f0"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.825713352006751,
+                                40.388851599297197
+                            ],
+                            [
+                                49.826012980724947,
+                                40.388728517526346
+                            ],
+                            [
+                                49.825793362306406,
+                                40.388654216310655
+                            ],
+                            [
+                                49.825713352006751,
+                                40.388851599297197
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Xaçmaz rayonu, Dalğalı qəsəbəsi",
+                "Project": "Qeyri-yaşayış sahələri Xaçmaz",
+                "City": null,
+                "Street": "Dalğalı qəsəbəsi",
+                "Valuation_": "Digər",
+                "Property_t": "Bağ evi",
+                "Book_Value": 2408999.9999999995,
+                "Use_type": "İcarə",
+                "Status_of_": null,
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Fərdi yaşayış evi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "Mülkiyyət",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Xüsusi",
+                "Total_area": 3107.6,
+                "Rent_area_": 0.0,
+                "Land_area_": 1.793,
+                "Registra_0": "302013006969-11301",
+                "Registra_2": "2821036086",
+                "Serial_num": null,
+                "Registra_4": "302013006969-11301",
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000602",
+                "Attachment": "Yes",
+                "Attachme_1": "Yes",
+                "Coordinate": "POLYGON((309908.5 4623619.25,309926 4623541.25,310127.25 4623604.25,310090 4623668.5,310040.25 4623633,310006 4623620,309908.5 4623619.25))",
+                "Kordinat": "No",
+                "guid": "300da3c4-f4f9-41cb-8794-22279fb15b1e"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                48.713990601066222,
+                                41.741661194235384
+                            ],
+                            [
+                                48.715161982239991,
+                                41.741691259636944
+                            ],
+                            [
+                                48.715569402921886,
+                                41.741816445827553
+                            ],
+                            [
+                                48.716155904714022,
+                                41.742147832615821
+                            ],
+                            [
+                                48.71662402396386,
+                                41.741578489334628
+                            ],
+                            [
+                                48.714225800060092,
+                                41.740963388278381
+                            ],
+                            [
+                                48.713990601066222,
+                                41.741661194235384
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Nəsimi rayonu, Tbilisi prospekti, ev 29",
+                "Project": "Qeyri yaşayış sahələri  Gilan",
+                "City": "Bakı şəhəri",
+                "Street": "Tbilisi prospekti",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 1027000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararsız",
+                "Unuseful_f": "Development",
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Torpaq sahəsi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "Mülkiyyət",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Xüsusi",
+                "Total_area": 431.7,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.06149,
+                "Registra_0": "008011000565-10301",
+                "Registra_2": "1122090568",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000606",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((400299.5 4471572.5,400305 4471542.25,400325.25 4471552.25,400299.5 4471572.5))",
+                "Kordinat": "No",
+                "guid": "615f7e0d-b760-4e1f-9880-003631d9975f"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.825319786722901,
+                                40.388786791540952
+                            ],
+                            [
+                                49.825626283648141,
+                                40.388607474995212
+                            ],
+                            [
+                                49.825389309519437,
+                                40.388514978955357
+                            ],
+                            [
+                                49.825319786722901,
+                                40.388786791540952
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Suraxanı rayonu, Yeni Suraxanı qəsəbəsi, Bakı-Aeroport yolu, ev 12",
+                "Project": "Buta Palace",
+                "City": "Bakı şəhəri",
+                "Street": "Yeni Suraxanı qəsəbəsi,Bakı-Aeroport yolu, ev 12",
+                "Valuation_": "Digər",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 36789.0,
+                "Use_type": "İcarə",
+                "Status_of_": null,
+                "Unuseful_f": null,
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Tədbir evi",
+                "Rent_opera": "İD Keytrinq MMC",
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 92.9,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.08033,
+                "Registra_0": "006011002001-10301",
+                "Registra_2": "1121156412",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000558",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((417098.75 4476868.75,417099.25 4476829.75,417078.75 4476827.25,417085 4476734.25,417186 4476734.25,417192 4476856,417149.75 4476857.5,417148 4476868.25,417098.75 4476868.75))",
+                "Kordinat": "No",
+                "guid": "1bc307bc-8873-41fe-9e0a-9531243cc54c"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                50.022529858032364,
+                                40.438335754713961
+                            ],
+                            [
+                                50.02311053889489,
+                                40.438336158940992
+                            ],
+                            [
+                                50.02313257156915,
+                                40.438239499370589
+                            ],
+                            [
+                                50.023630858033052,
+                                40.438230195759672
+                            ],
+                            [
+                                50.023575990407302,
+                                40.437132897620188
+                            ],
+                            [
+                                50.022385307490651,
+                                40.437122834116558
+                            ],
+                            [
+                                50.022299490716627,
+                                40.437959936856444
+                            ],
+                            [
+                                50.022540840763632,
+                                40.437984500167566
+                            ],
+                            [
+                                50.022529858032364,
+                                40.438335754713961
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu, Tbilisi prospekti, ev 25",
+                "Project": "Qeyri yaşayış sahələri  Gilan",
+                "City": "Bakı şəhəri",
+                "Street": "Tbilisi prospekti",
+                "Valuation_": "Yaşayış sahəsi",
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 634000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararsız",
+                "Unuseful_f": "Development",
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Torpaq sahəsi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 363.7,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.04361,
+                "Registra_0": "011011002757-10301",
+                "Registra_2": "1122181399",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000608",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((400329.25 4471523.5,400332.5 4471500.5,400355 4471510.75,400329.25 4471523.5))",
+                "Kordinat": "No",
+                "guid": "1dcc7c9f-3fa3-4cda-b623-b083d9d183ba"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.825677900823941,
+                                40.38834899369057
+                            ],
+                            [
+                                49.825983221651526,
+                                40.38823723090114
+                            ],
+                            [
+                                49.825719783245177,
+                                40.388142214599789
+                            ],
+                            [
+                                49.825677900823941,
+                                40.38834899369057
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Owner": "PMD Group MMC",
+                "Property_n": "Bakı şəhəri, Yasamal rayonu, Tbilisi prospekti, ev 27",
+                "Project": "Qeyri yaşayış sahələri  Gilan",
+                "City": "Bakı şəhəri",
+                "Street": "Tbilisi prospekti",
+                "Valuation_": null,
+                "Property_t": "Fərdi yaşayış evi",
+                "Book_Value": 494000.0,
+                "Use_type": "İcarə",
+                "Status_of_": "Yararsız",
+                "Unuseful_f": "Development",
+                "Ownership_": "Tam",
+                "Status": "Qiymətləndirmə",
+                "Property_u": "Torpaq sahəsi",
+                "Rent_opera": null,
+                "Rights_o_0": "Mülkiyyət",
+                "Rights_on_": "İstifadəsində",
+                "Ownershi_2": "Xüsusi",
+                "Ownershi_0": "Dövlət",
+                "Total_area": 88.4,
+                "Rent_area_": 0.0,
+                "Land_area_": 0.034,
+                "Registra_0": "011011001161-10301",
+                "Registra_2": "1122193245",
+                "Serial_num": null,
+                "Registra_4": null,
+                "Registrati": null,
+                "Use_type_c": "Yaşayış məntəqələrinin torpaqları",
+                "Beginning_": null,
+                "End_of_lan": null,
+                "Rent_time": "0",
+                "Montly_ren": 0.0,
+                "Lessor": null,
+                "Special_co": "000000634",
+                "Attachment": "Yes",
+                "Attachme_1": "No",
+                "Coordinate": "POLYGON((410939.79560754396 4604107.014610008,416559.78783633397 4606067.069198241,416627.5257094819 4608450.438134221,416270.9482657796 4609876.68607271,410939.79560754396 4604107.014610008))",
+                "Kordinat": "No",
+                "guid": "c00f8f0c-6937-4a0d-8532-2df66a654ac2"
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                49.931565719449353,
+                                41.583693243722479
+                            ],
+                            [
+                                49.994706097202787,
+                                41.63623079585313
+                            ],
+                            [
+                                49.999185418806277,
+                                41.623423547358016
+                            ],
+                            [
+                                49.99870442846381,
+                                41.601952087334766
+                            ],
+                            [
+                                49.931565719449353,
+                                41.583693243722479
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

@@ -10,42 +10,117 @@
 
   <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css" />
 
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://js.arcgis.com/4.31/"></script>
-
-  <script src="main.js"> </script>
+  <script src="main.js" defer></script>
+  <script src="controls.js" defer></script>
+  <script src="table.js" defer></script>
+  
   
 
 </head>
 
 <body>
   <!-- <div id="viewDiv"></div> -->
-  <div style="width: 100%; height:100vh" id="viewDiv" class="postion-absolute"></div>
-  <!-- <div id="srDiv" class="esri-widget"></div> -->
-  <div style="padding: 10px 0px;" class="container display-flex align-item-center justify-content-space-bet position-relative">
-      <div class="display-flex align-item-center ">
-          <div style="background-color: white;" class="border-radius-100 z-index-2">
-              <a href="">
-                  <img style="height: 50px;" src="/img/download.png" alt="">
-              </a>
-          </div>
-          <div style="margin-left:-40px;background-color: #00598e;" class="padding-10-20 border-radius-100 padding-left-50">
-              <input style="padding: 0px 20px;border-radius:100px" type="text" name="" id="">
-          </div>
+  <div class="app-container">
+
+  
+
+  <!-- <div style="padding: 10px 0px; position: fixed; left: 40%; z-index: 200;" class="container display-flex align-item-center justify-content-space-bet position-relative search-parent"> -->
+    <header class="header-container">
+      <div class="logo-box">
+        <a href="#">
+          <img src="/img/h2ez.png" alt="Logo">
+        </a>
       </div>
-      <div class="display-flex">
-          <div class="background-white padding-8 border-radius margin-right">
-              <a href="">
-                  <img style="height: 25px; width:25px" src="/img/preview.png" alt="">
-              </a>
-          </div>
-          <div class="background-white padding-8 border-radius">
-              <a href="">
-                  <img style="height: 25px; width:25px" src="/img/hide.png" alt="">
-              </a>
-          </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search by Owner or Address">
+        <ul id="suggestionList"></ul>
       </div>
+      <div class="view-toggle">
+        <button id="switch-btn">2D</button>
+      </div>
+    </header>
+    <!-- <div class="display-flex full-screen">
+        <div class="background-white padding-8 border-radius margin-right">
+            <a href="">
+                <img style="height: 25px; width:25px" src="/img/preview.png" alt="">
+            </a>
+        </div>
+        <div class="background-white padding-8 border-radius">
+            <a href="">
+                <img style="height: 25px; width:25px" src="/img/hide.png" alt="">
+            </a>
+        </div>
+    </div> -->
+<!-- </div> -->
+<!-- <div id="tableDiv" style="max-height: 300px; background: white; z-index: 999; border-top: 1px solid #ccc; display: none; overflow-y: auto;"></div> -->
+
+<!-- Advanced Attribute Table Container (hidden by default) -->
+<div id="advancedTableContainer" style="display: none; max-height: 300px; overflow-y: auto;  font-size: 10px;">
+  <!-- Advanced Attribute Table Controls -->
+  <div id="tableHeader" style="display: flex; align-items: center; justify-content: space-between; padding: 5px; background: #f9f9f9; border-bottom: 1px solid #ccc; font-size: 14px;">
+    <div>
+      <span id="tableTitle">GeoJSON (Total: 0) (Selector: 0)</span>
+    </div>
+    <div>
+      <button id="zoomToBtn">Zoom to</button>
+      <button id="filterBtn">Filter</button>
+      <button id="showHideColumnsBtn">Show/Hide columns</button>
+      <button id="exportSelectedBtn">Export Selected</button>
+      <button id="exportAllBtn">Export All</button>
+    </div>
   </div>
+  
+  <!-- Show/Hide Columns Panel (initially hidden) -->
+  <div id="columnsPanel" style="display:none; position: absolute; background: #fff; border: 1px solid #ccc; padding: 10px;"></div>
+  
+  <!-- Table Container -->
+  <div style="overflow-x:auto; margin-top: 5px;">
+    <table id="customTable" border="1" style="border-collapse: collapse; width: 100%;">
+      <!-- The table header (with grouped columns) and body will be built dynamically by table.js -->
+    </table>
+  </div>
+  
+  <!-- Pagination Controls -->
+  <div id="paginationControls" style="margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+    <button id="prevPageBtn" disabled>Previous</button>
+    <span id="pageInfo" style="margin: 0 10px;">Page 1 of 1</span>
+    <button id="nextPageBtn" disabled>Next</button>
+  </div>
+</div>
+
+
+
+  <div style="width: 100%; height:100vh" id="viewDiv" class="postion-absolute"></div>
+
+        
+        <div id="toolbarDiv" style="position: absolute;  margin-top: 300px; " class="esri-component esri-widget">
+          <button
+            id="distance"
+            class="esri-widget--button esri-interactive esri-icon-measure-line"
+            title="Distance Measurement Tool"
+          ></button>
+          <button
+            id="area"
+            class="esri-widget--button esri-interactive esri-icon-measure-area"
+            title="Area Measurement Tool"
+          ></button>
+          <button
+            id="clear"
+            class="esri-widget--button esri-interactive esri-icon-trash"
+            title="Clear Measurements"
+          ></button>
+        </div>
+        
+        <!-- A container for displaying measurement results when measureIcon is clicked -->
+        <div id="measurementResults" style="position: absolute; bottom: 80px; left: 20px; background: rgba(255,255,255,0.9); padding: 10px; border: 1px solid #ccc; display: none;">
+          <strong>Measurement Results:</strong>
+          <div id="resultsContent"></div>
+        </div>
+        
+        <arcgis-locate position="bottom"></arcgis-locate>
+<!-- Table container (positioned at bottom, adjust height/position as needed) -->
   <div style="bottom: 0; left:0; width:100%; padding:20px" class="position-fixed">
       <div class="display-flex align-item-center justify-content-center">
           <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
@@ -54,14 +129,117 @@
               </a>
           </div>
           
-          <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
-              <a href="">
-                  <img style="height:30px" src="/img/layers.png" alt="">
-              </a>
+          <div id="toggleButton" style="margin-right:30px; padding:7px; background-color: #646464; border-radius: 50%">
+            <a href="#" id="ToggleBtn" onclick="toggleLayerList(event)">
+                <img style="height:30px" src="/img/layers.png" alt="Layers">
+            </a>
+           
+            <div class="layer-list" style="display: none;">
+              <div class="layer-header">
+                📌 Layer List <span onclick="toggleLayerList(event)" class="close-btn">✖</span>
+              </div>
+          
+              <!-- Investment Property (Parent) -->
+              <div class="layer-item">
+                <span class="toggle-btn" onclick="toggleNested('mapLayers', this, event)">▶</span>
+                <!-- Change 'childContainerId' to 'mapLayers' so that it toggles the correct container -->
+                <input type="checkbox" id="investmentProperty" onclick="toggleCheckbox('mapLayers', this, event)">
+                <label for="investmentProperty">Investment Property</label>
+              </div>
+          
+              <!-- Container for child items under Investment Property -->
+              <div id="mapLayers" class="nested">
+                <!-- Non-Residential -->
+                <div class="layer-item">
+                  <span class="toggle-btn" onclick="toggleNested('nonResidential', this, event)">▶</span>
+                  <input type="checkbox" id="nonResidentialLayer" onclick="toggleCheckbox('nonResidential', this, event)">
+                  <label for="nonResidentialLayer">Non-Residential</label>
+                </div>
+          
+                <div id="nonResidential" class="nested">
+                  <div class="layer-item">
+                    <input type="checkbox" id="nonResidentialBuildings" onclick="toggleCheckbox('', this, event)">
+                    <label for="nonResidentialBuildings">Non-Residential Buildings</label>
+                  </div>
+                  <div class="layer-item">
+                    <input type="checkbox" id="nonResidentialPremises" onclick="toggleCheckbox('', this, event)">
+                    <label for="nonResidentialPremises">Non-Residential Premises</label>
+                  </div>
+                </div>
+          
+                <!-- Residential -->
+                <div class="layer-item">
+                  <span class="toggle-btn" onclick="toggleNested('residential', this, event)">▶</span>
+                  <input type="checkbox" id="residentialLayer" onclick="toggleCheckbox('residential', this, event)">
+                  <label for="residentialLayer">Residential</label>
+                </div>
+          
+                <div id="residential" class="nested">
+                  <div class="layer-item">
+                    <input type="checkbox" id="apartmentsLayer" onclick="toggleCheckbox('', this, event)">
+                    <label for="apartmentsLayer">Apartments</label>
+                  </div>
+                  <div class="layer-item">
+                    <input type="checkbox" id="residentialGroup" onclick="toggleCheckbox('', this, event)">
+                    <label for="residentialGroup">Residential</label>
+                  </div>
+                  <div class="layer-item">
+                    <input type="checkbox" id="singleFamilyHouses" onclick="toggleCheckbox('', this, event)">
+                    <label for="singleFamilyHouses">Single Family Houses</label>
+                  </div>
+                </div>
+          
+                <!-- Lands -->
+                <div class="layer-item">
+                  <span class="toggle-btn" onclick="toggleNested('lands', this, event)">▶</span>
+                  <input type="checkbox" id="landsLayer" onclick="toggleCheckbox('lands', this, event)">
+                  <label for="landsLayer">Lands</label>
+                </div>
+          
+                <div id="lands" class="nested">
+                  <div class="layer-item">
+                    <input type="checkbox" id="landsSubLayer" onclick="toggleCheckbox('', this, event)">
+                    <label for="landsSubLayer">Lands</label>
+                  </div>
+                </div>
+          
+                <!-- Property Compounds -->
+                <div class="layer-item">
+                  <span class="toggle-btn" onclick="toggleNested('propertyCompounds', this, event)">▶</span>
+                  <input type="checkbox" id="propertyCompoundsLayer" onclick="toggleCheckbox('propertyCompounds', this, event)">
+                  <label for="propertyCompoundsLayer">Property Compounds</label>
+                </div>
+          
+                <div id="propertyCompounds" class="nested">
+                  <div class="layer-item">
+                    <input type="checkbox" id="propertyCompoundsSubLayer" onclick="toggleCheckbox('', this, event)">
+                    <label for="propertyCompoundsSubLayer">Property Compounds</label>
+                  </div>
+                </div>
+          
+                <!-- Hotels -->
+                <div class="layer-item">
+                  <span class="toggle-btn" onclick="toggleNested('hotels', this, event)">▶</span>
+                  <input type="checkbox" id="hotelsLayer" onclick="toggleCheckbox('hotels', this, event)">
+                  <label for="hotelsLayer">Hotels</label>
+                </div>
+          
+                <div id="hotels" class="nested">
+                  <div class="layer-item">
+                    <input type="checkbox" id="hotelsSubLayer" onclick="toggleCheckbox('', this, event)">
+                    <label for="hotelsSubLayer">Hotels</label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
-              <a href="">
-                  <img style="height:30px" src="/img/symbols.png" alt="">
+          
+
+
+
+          <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%" class="attrib-table">
+              <a href="" onclick="toggleAdvancedTable(); return false;">
+                  <img style="height:30px" src="/img/attrib.png" alt="">
               </a>
           </div>
           <!-- <div   style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
@@ -70,11 +248,11 @@
               </a>
           </div> -->
 
-          <div style="margin-right:30px; padding:7px; background-color: #646464; border-radius: 50%">
+          <!-- <div style="margin-right:30px; padding:7px; background-color: #646464; border-radius: 50%">
               <a href="#" id="basemapIcon">
                 <img style="height:30px" src="/img/maps.png" alt="Basemap Icon">
               </a>
-            </div>
+            </div> -->
             
             
             
@@ -93,24 +271,32 @@
                   <img style="height:30px" src="/img/color.png" alt="">
               </a>
           </div>
-          <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
+          <!-- <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
               <a href="">
                   <img style="height:30px" src="/img/measure.png" alt="">
               </a>
-          </div>
+          </div> -->
           <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
-              <a href="">
-                  <img style="height:30px" src="/img/print.png" alt="">
+              <a href="" id="printIcon">
+                  <img id="print" style="height:30px" src="/img/print.png" alt="">
               </a>
           </div>
           <div style="padding:7px; background-color: #646464;border-radius: 50%" >
-              <a href="">
-                  <img style="height:30px" src="/img/help.png" alt="">
+              <a href="#" id="measureIcon">
+                  <img id="measure" style="height:30px" src="/img/help.png" alt="">
               </a>
           </div>
+
+
+          <div 
+          id="coordinateDisplay">
+          <span id="coordinateText">Lat: 0.000000, Lon: 0.000000</span>
+        </div>
+
       </div>
   </div>
- 
+</div>
+
 </body>
 
 </html>
