@@ -12,6 +12,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://js.arcgis.com/4.31/"></script>
+  <!-- <script src="auth.js" defer></script> -->
   <script src="main.js" defer></script>
   <script src="controls.js" defer></script>
   <script src="table.js" defer></script>
@@ -76,7 +77,7 @@
   <div id="columnsPanel" style="display:none; position: absolute; background: #fff; border: 1px solid #ccc; padding: 10px;"></div>
   
   <!-- Table Container -->
-  <div style="overflow-x:auto; margin-top: 5px;">
+  <div style="overflow-x: auto; max-width: 99%; margin-top: 5px;">
     <table id="customTable" border="1" style="border-collapse: collapse; width: 100%;">
       <!-- The table header (with grouped columns) and body will be built dynamically by table.js -->
     </table>
@@ -118,7 +119,11 @@
           <strong>Measurement Results:</strong>
           <div id="resultsContent"></div>
         </div>
-        
+        <div id="colorInfoPanel" style="display: none; position: absolute; right: 20px; top: 100px; background: white; padding: 15px; border: 1px solid #ccc; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 1000; max-width: 300px;">
+  <strong style="font-size: 16px;">Subcategory Colors</strong>
+  <div id="colorInfoContent" style="margin-top: 10px;"></div>
+</div>
+
         <arcgis-locate position="bottom"></arcgis-locate>
 <!-- Table container (positioned at bottom, adjust height/position as needed) -->
   <div style="bottom: 0; left:0; width:100%; padding:20px" class="position-fixed">
@@ -134,11 +139,17 @@
                 <img style="height:30px" src="/img/layers.png" alt="Layers">
             </a>
            
-            <div class="layer-list" style="display: none;">
+            <div class="layer-list" style="display: none; max-height: 600px; overflow-y: auto;">
               <div class="layer-header">
-                📌 Layer List <span onclick="toggleLayerList(event)" class="close-btn">✖</span>
+                📌 Layer List
+                <button onclick="toggleLayerGroup(event)" style="margin-left: 10px; font-size: 12px;">Switch View</button>
+                <span onclick="toggleLayerList(event)" class="close-btn">✖</span>
               </div>
-          
+
+              <!-- Dynamic group-based layer list -->
+              <div id="groupedLayerList" style="display: none;"></div>
+
+              <div id="staticLayerList">
               <!-- Investment Property (Parent) -->
               <div class="layer-item">
                 <span class="toggle-btn" onclick="toggleNested('mapLayers', this, event)">▶</span>
@@ -231,11 +242,10 @@
                   </div>
                 </div>
               </div>
+              </div>
+
             </div>
           </div>
-          
-
-
 
           <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%" class="attrib-table">
               <a href="" onclick="toggleAdvancedTable(); return false;">
@@ -266,7 +276,7 @@
                   <img style="height:30px" src="/img/icon_icon.png" alt="">
               </a>
           </div>
-          <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%">
+          <div style="margin-right:30px; padding:7px; background-color: #646464;border-radius: 50%" class="color-info">
               <a href="">
                   <img style="height:30px" src="/img/color.png" alt="">
               </a>
@@ -300,3 +310,4 @@
 </body>
 
 </html>
+

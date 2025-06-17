@@ -18,18 +18,78 @@ let allTableData = [];
 // Define columns with grouping. 
 // "group" is the higher-level label, "label" is the column heading, and "key" is the property key.
 const columns = [
-  { group: "Building details", label: "Owner",            key: "owner",         sortType: "string"  },
-  { group: "Building details", label: "Special Code",     key: "special_co",    sortType: "numeric" },
-  { group: "Building details", label: "Name",             key: "property_n",    sortType: "string"  },
-  { group: "Building details", label: "Project",          key: "project",       sortType: "string"  },
-  { group: "Building details", label: "City",             key: "city",          sortType: "string"  },
-  { group: "Building details", label: "Address",          key: "street",        sortType: "string"  },
-  { group: "Building details", label: "Type",             key: "property_t",    sortType: "string"  },
-  { group: "Building details", label: "Use Type",         key: "use_type",      sortType: "string"  },
-  { group: "Land & Area Info", label: "Total Area (m²)",  key: "total_area",    sortType: "numeric"  },
-  { group: "Land & Area Info", label: "Land Area (ha)",   key: "land_area",     sortType: "numeric"  },
-  { group: "Land & Area Info", label: "Operant",          key: "rent_opera",    sortType: "string"  },
-  { group: "Land & Area Info", label: "Attachments",      key: "attachment",    sortType: "string"  }
+  // Group: Building Details
+  { group: "Address details", label: "Owner", key: "owner", sortType: "string" },
+  { group: "Address details", label: "Special Code", key: "special_co", sortType: "string" },
+  { group: "Address details", label: "Project", key: "project", sortType: "string" },
+  { group: "Address details", label: "Title by Document", key: "title_by_document", sortType: "string" },
+  { group: "Address details", label: "Region", key: "region", sortType: "string" },
+  { group: "Address details", label: "City", key: "city", sortType: "string" },
+  { group: "Address details", label: "Street", key: "street", sortType: "string" },
+  { group: "Address details", label: "Address", key: "address", sortType: "string" },
+  { group: "Building details", label: "Category", key: "category", sortType: "string" },
+  { group: "Building details", label: "Subcategory", key: "subcategory", sortType: "string" },
+  { group: "Building details", label: "Valuation Category", key: "valuation_category", sortType: "string" },
+  { group: "Building details", label: "Property Type", key: "property_type", sortType: "string" },
+  { group: "Building details", label: "Use Type", key: "use_type", sortType: "string" },
+  { group: "Building details", label: "Lease Status", key: "lease_status", sortType: "string" },
+  { group: "Building details", label: "No Lease Reason", key: "nolease_reason", sortType: "string" },
+  { group: "Building details", label: "Ownership Right", key: "ownership_right", sortType: "string" },
+  { group: "Building details", label: "Status X", key: "status_x", sortType: "string" },
+  { group: "Building details", label: "Property Use Type", key: "property_use_type", sortType: "string" },
+  { group: "Building details", label: "Rent Operant", key: "rent_opera", sortType: "string" },
+  { group: "Building details", label: "Legal Property Ownership", key: "legal_property_ownership_type", sortType: "string" },
+  { group: "Building details", label: "Legal Land Ownership", key: "legal_land_ownership_type", sortType: "string" },
+  { group: "Building details", label: "Property Ownership Type", key: "property_ownership_type", sortType: "string" },
+  { group: "Building details", label: "Land Ownership Type", key: "land_ownership_type", sortType: "string" },
+
+  // Group: Land & Area Info
+  { group: "Land & Area Info", label: "Total Area (m²)", key: "total_area", sortType: "numeric" },
+  { group: "Land & Area Info", label: "Lease Area", key: "lease_area", sortType: "numeric" },
+  { group: "Land & Area Info", label: "Land Area (ha)", key: "land_area", sortType: "numeric" },
+  { group: "Land & Area Info", label: "Actual Land Area", key: "actual_land_area", sortType: "numeric" },
+  { group: "Land & Area Info", label: "Tenant Business Area", key: "tenant_business_area", sortType: "numeric" },
+
+  // Group: Registration & Legal
+  { group: "Registration & Legal", label: "Property Registry No", key: "property_registry_no", sortType: "string" },
+  { group: "Registration & Legal", label: "Registration No", key: "registration_no", sortType: "string" },
+  { group: "Registration & Legal", label: "Serial No", key: "serial_no", sortType: "string" },
+  { group: "Registration & Legal", label: "Technical Passport Registry No", key: "technical_pasport_registry_no", sortType: "string" },
+  { group: "Registration & Legal", label: "Registration Date", key: "registration_date", sortType: "string" },
+
+  // Group: Lease Info
+  { group: "Lease Info", label: "Land Lease Start Date", key: "land_lease_start_date", sortType: "string" },
+  { group: "Lease Info", label: "Land Lease End Date", key: "land_lease_end_date", sortType: "string" },
+  { group: "Lease Info", label: "Lease Duration", key: "lease_duration", sortType: "numeric" },
+  { group: "Lease Info", label: "Monthly Rent", key: "monthly_rent", sortType: "numeric" },
+  { group: "Lease Info", label: "Lessor Party", key: "lessor_party", sortType: "string" },
+
+  // Group: Valuation
+  { group: "Valuation", label: "Book Value", key: "book_value", sortType: "numeric" },
+  { group: "Valuation", label: "Valuation Method", key: "valuation_method", sortType: "string" },
+  { group: "Valuation", label: "Prior Year Valuation 2023", key: "prior_year_valuation_results_2023", sortType: "numeric" },
+  { group: "Valuation", label: "Current Year Valuation 2024", key: "current_year_valuation_resluts_2024", sortType: "numeric" },
+  { group: "Valuation", label: "Variance", key: "variance", sortType: "numeric" },
+
+  // Group: Attachments & Coordinates
+  { group: "Attachments", label: "Attachment Title Deed", key: "attachment_title_deed", sortType: "string" },
+  { group: "Attachments", label: "Attachment Technical Passport", key: "attachment_technical_pasport", sortType: "string" },
+  { group: "Attachments", label: "Attachment Other", key: "attachemnt_other", sortType: "string" },
+  { group: "Coordinates", label: "Coordinate from Technical Passport", key: "coordinate_technical_pasport", sortType: "string" },
+
+  // Group: Strategic Info
+  { group: "Strategy", label: "Date Added to Portfolio", key: "date_added_portfel", sortType: "string" },
+  { group: "Strategy", label: "Strategic Recommendation", key: "strategic_recomendation", sortType: "string" },
+  { group: "Strategy", label: "Recommended Use", key: "recomended_use", sortType: "string" },
+  { group: "Strategy", label: "Perspective Stage", key: "perspective_stage", sortType: "string" },
+  { group: "Strategy", label: "Phase", key: "phase", sortType: "string" },
+  { group: "Strategy", label: "Status Y", key: "status_y", sortType: "string" },
+
+  // Group: Other Info
+  { group: "Other", label: "Year", key: "year", sortType: "numeric" },
+  { group: "Other", label: "Quarter", key: "quarter", sortType: "numeric" },
+  { group: "Other", label: "Note", key: "note", sortType: "string" },
+  { group: "Other", label: "Type", key: "type", sortType: "string" }
 ];
 
 // Initialize the table after data is fetched
@@ -38,7 +98,7 @@ function initCustomTable(data) {
   tableData = data;
   // By default, make all columns visible
   visibleColumns = columns.map(col => col.key);
-  
+
   buildTableHeader();
   buildTableBody();
   buildPagination();
@@ -52,53 +112,51 @@ function updateCustomTable(filteredData) {
   // if (visibleColumns.length === 0) {
   //   visibleColumns = columns.map(col => col.key);
   // }
-    tableData = filteredData;
-    currentPage = 1;
-    buildTableBody();
-    buildPagination();
-    updateTableHeaderLabels();
-    attachRowCheckboxListeners();
+  tableData = filteredData;
+  currentPage = 1;
+  buildTableBody();
+  buildPagination();
+  updateTableHeaderLabels();
+  attachRowCheckboxListeners();
+}
+
+function sortByColumn(key, sortType) {
+  // Toggle sort order if the same column is clicked
+  if (currentSortColumn === key) {
+    currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+  } else {
+    currentSortColumn = key;
+    currentSortOrder = 'asc';
   }
 
-  function sortByColumn(key, sortType) {
-    // Toggle sort order if the same column is clicked
-    if (currentSortColumn === key) {
-      currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+  tableData.sort((a, b) => {
+    let aVal = a[key];
+    let bVal = b[key];
+
+    if (aVal === null || aVal === undefined) aVal = "";
+    if (bVal === null || bVal === undefined) bVal = "";
+
+    if (sortType === 'numeric') {
+      aVal = parseFloat(aVal) || 0;
+      bVal = parseFloat(bVal) || 0;
+      return currentSortOrder === 'asc' ? aVal - bVal : bVal - aVal;
     } else {
-      currentSortColumn = key;
-      currentSortOrder = 'asc';
+      aVal = aVal.toString().toLowerCase();
+      bVal = bVal.toString().toLowerCase();
+      if (aVal < bVal) return currentSortOrder === 'asc' ? -1 : 1;
+      if (aVal > bVal) return currentSortOrder === 'asc' ? 1 : -1;
+      return 0;
     }
-    
-    tableData.sort((a, b) => {
-      let aVal = a[key];
-      let bVal = b[key];
-      
-      // Handle null or undefined values
-      if (aVal === null || aVal === undefined) aVal = "";
-      if (bVal === null || bVal === undefined) bVal = "";
-      
-      if (sortType === 'numeric') {
-        aVal = parseFloat(aVal) || 0;
-        bVal = parseFloat(bVal) || 0;
-        return currentSortOrder === 'asc' ? aVal - bVal : bVal - aVal;
-      } else {
-        // For strings: case-insensitive comparison
-        aVal = aVal.toString().toLowerCase();
-        bVal = bVal.toString().toLowerCase();
-        if (aVal < bVal) return currentSortOrder === 'asc' ? -1 : 1;
-        if (aVal > bVal) return currentSortOrder === 'asc' ? 1 : -1;
-        return 0;
-      }
-    });
-    
-    // Reset to the first page and rebuild the table
-    currentPage = 1;
-    buildTableHeader(); // so the sort indicator is updated
-    buildTableBody();
-    buildPagination();
-  }
-  
-  
+  });
+
+  // Reset to the first page and rebuild the table
+  currentPage = 1;
+  buildTableHeader(); // so the sort indicator is updated
+  buildTableBody();
+  buildPagination();
+}
+
+
 
 // Build the grouped table header with two rows:
 // 1) Groups (spanning multiple columns)
@@ -149,25 +207,24 @@ function buildTableHeader() {
     const th = document.createElement("th");
     th.id = "colheader_" + col.key; // For toggling visibility
     th.style.textAlign = "center";
-    
+
     // Build label with sort indicator if applicable
     let label = col.label;
     if (col.key === currentSortColumn) {
       label += currentSortOrder === 'asc' ? " ▲" : " ▼";
     }
     th.innerText = label;
-    
-    // Hide the header cell if the column is not visible
+
     if (!visibleColumns.includes(col.key)) {
       th.style.display = "none";
     }
-    
-    // Add a click listener to sort the table when this header is clicked
-    th.addEventListener("click", function() {
+
+    th.addEventListener("click", function () {
       sortByColumn(col.key, col.sortType || "string");
     });
-    
+
     labelRow.appendChild(th);
+
   });
   thead.appendChild(labelRow);
 
@@ -204,26 +261,23 @@ function buildTableBody() {
     `;
     tr.appendChild(selectTd);
 
-    // Build cells for each column
     columns.forEach(col => {
       const td = document.createElement("td");
-      td.id = "col_" + col.key;  // For show/hide
+      td.id = "col_" + col.key;
       td.style.textAlign = "center";
-      // Only fill the text if the column is visible
       if (visibleColumns.includes(col.key)) {
-        // Show content
         td.style.display = "";
         td.textContent = item[col.key] !== null && item[col.key] !== undefined
-                         ? item[col.key]
-                         : "";
+          ? item[col.key]
+          : "";
       } else {
-        // Hide the cell
         td.style.display = "none";
       }
       tr.appendChild(td);
     });
 
     tbody.appendChild(tr);
+
   });
 
   table.appendChild(tbody);
@@ -266,7 +320,7 @@ function nextPage() {
 function buildColumnPanel() {
   const panel = document.getElementById("columnsPanel");
   panel.innerHTML = ""; // Clear existing content
-  
+
   // Set panel to have a scroll if content overflows
   panel.style.maxHeight = "200px"; // Adjust as needed
   panel.style.overflowY = "auto";
@@ -291,15 +345,13 @@ function buildColumnPanel() {
     groupLabel.style.fontWeight = "bold";
     const groupCheckbox = document.createElement("input");
     groupCheckbox.type = "checkbox";
-    // Check if all columns in the group are visible
     groupCheckbox.checked = groupMap[group].every(col => visibleColumns.includes(col.key));
-    groupCheckbox.dataset.group = group; // mark as group-level
+    groupCheckbox.dataset.group = group;
     groupCheckbox.style.marginRight = "5px";
     groupLabel.appendChild(groupCheckbox);
     groupLabel.appendChild(document.createTextNode(group));
     groupDiv.appendChild(groupLabel);
 
-    // Container for child checkboxes
     const childContainer = document.createElement("div");
     childContainer.style.marginLeft = "20px";
     groupMap[group].forEach(col => {
@@ -310,7 +362,7 @@ function buildColumnPanel() {
       const childCheckbox = document.createElement("input");
       childCheckbox.type = "checkbox";
       childCheckbox.checked = visibleColumns.includes(col.key);
-      childCheckbox.dataset.key = col.key;  // mark as individual column
+      childCheckbox.dataset.key = col.key;
       childCheckbox.style.marginRight = "5px";
 
       childLabel.appendChild(childCheckbox);
@@ -319,6 +371,7 @@ function buildColumnPanel() {
     });
     groupDiv.appendChild(childContainer);
     panel.appendChild(groupDiv);
+
   }
 }
 
@@ -340,7 +393,7 @@ function buildFilterSection() {
     advancedTableContainer.insertBefore(filterSection, advancedTableContainer.childNodes[1]);
   }
   filterSection.innerHTML = "";
-  
+
   // Global operator selection (AND/OR)
   const combineDiv = document.createElement("div");
   combineDiv.style.marginBottom = "10px";
@@ -352,31 +405,31 @@ function buildFilterSection() {
     </select>
   `;
   filterSection.appendChild(combineDiv);
-  
+
   // Container for filter lines
   const linesContainer = document.createElement("div");
   linesContainer.id = "filterLinesContainer";
   filterSection.appendChild(linesContainer);
-  
+
   // "Add Filter" button
   const addLineBtn = document.createElement("button");
   addLineBtn.id = "addFilterLineBtn";
   addLineBtn.textContent = "Add Filter";
   addLineBtn.addEventListener("click", addFilterLine);
   filterSection.appendChild(addLineBtn);
-  
+
   // "Apply Filter" button
   const applyBtn = document.createElement("button");
   applyBtn.id = "applyFiltersBtn";
   applyBtn.textContent = "Apply Filter";
   applyBtn.addEventListener("click", applyFiltersFromUI);
   filterSection.appendChild(applyBtn);
-  
+
   // "Clear Filter" button
   const clearBtn = document.createElement("button");
   clearBtn.id = "clearFiltersBtn";
   clearBtn.textContent = "Clear Filter";
-  clearBtn.addEventListener("click", function() {
+  clearBtn.addEventListener("click", function () {
     // Clear filter lines
     document.getElementById("filterLinesContainer").innerHTML = "";
     // Reset tableData to full data and rebuild table
@@ -397,7 +450,7 @@ function addFilterLine() {
   const lineDiv = document.createElement("div");
   lineDiv.className = "filterLine";
   lineDiv.style.marginBottom = "5px";
-  
+
   // Column selector
   const colSelect = document.createElement("select");
   colSelect.className = "filterColumn";
@@ -408,33 +461,33 @@ function addFilterLine() {
     colSelect.appendChild(option);
   });
   lineDiv.appendChild(colSelect);
-  
+
   // Operator selector
   const opSelect = document.createElement("select");
   opSelect.className = "filterOperator";
   updateOperatorOptions(colSelect.value, opSelect);
   // Update operator options when column changes
-  colSelect.addEventListener("change", function() {
+  colSelect.addEventListener("change", function () {
     updateOperatorOptions(this.value, opSelect);
   });
   lineDiv.appendChild(opSelect);
-  
+
   // Value input
   const valueInput = document.createElement("input");
   valueInput.type = "text";
   valueInput.className = "filterValue";
   lineDiv.appendChild(valueInput);
-  
+
   // Delete button for this filter line
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
-  deleteBtn.addEventListener("click", function() {
+  deleteBtn.addEventListener("click", function () {
     container.removeChild(lineDiv);
     // Automatically reapply filters when a line is deleted
     applyFiltersFromUI();
   });
   lineDiv.appendChild(deleteBtn);
-  
+
   container.appendChild(lineDiv);
 }
 
@@ -473,7 +526,7 @@ function applyFiltersFromUI() {
       rules.push({ columnKey, operator, value });
     }
   });
-  
+
   const combineOperator = document.getElementById('filterCombineOperator').value;
   const filteredData = window.allTableData.filter(item => {
     const evaluations = rules.map(rule => {
@@ -483,7 +536,7 @@ function applyFiltersFromUI() {
         if (colDef.sortType === 'numeric') {
           const numPropVal = parseFloat(propVal) || 0;
           const numRuleVal = parseFloat(rule.value) || 0;
-          switch(rule.operator) {
+          switch (rule.operator) {
             case "=": return numPropVal === numRuleVal;
             case ">": return numPropVal > numRuleVal;
             case ">=": return numPropVal >= numRuleVal;
@@ -494,7 +547,7 @@ function applyFiltersFromUI() {
         } else {
           const strPropVal = (propVal !== null && propVal !== undefined) ? propVal.toString().toLowerCase() : "";
           const ruleVal = rule.value.toLowerCase();
-          switch(rule.operator) {
+          switch (rule.operator) {
             case "contains": return strPropVal.includes(ruleVal);
             case "starts with": return strPropVal.startsWith(ruleVal);
             case "ends with": return strPropVal.endsWith(ruleVal);
@@ -510,7 +563,7 @@ function applyFiltersFromUI() {
       return evaluations.some(e => e);
     }
   });
-  
+
   // Update the table data and rebuild the table
   tableData = filteredData;
   currentPage = 1;
@@ -518,7 +571,7 @@ function applyFiltersFromUI() {
   buildTableBody();
   buildPagination();
   updateTableHeaderLabels();
-  
+
   // Update the map to display only the filtered properties.
   if (typeof renderProperties === "function") {
     renderProperties(filteredData);
@@ -573,60 +626,59 @@ function updateTableHeaderLabels() {
 }
 
 function exportSelectedRowsToXLSX() {
-    if (selectedRows.size === 0) {
-      alert("No rows selected to export.");
-      return;
-    }
-  
-    // Build an array of selected items
-    const selectedItems = Array.from(selectedRows).map(idx => tableData[idx]);
-    // Only include the columns that are currently visible
-    const activeCols = columns.filter(c => visibleColumns.includes(c.key));
-    const header = ["Index", ...activeCols.map(c => c.label)];
-  
-    const dataRows = selectedItems.map((item, i) => {
-      const row = [i + 1];
-      activeCols.forEach(col => {
-        row.push(item[col.key] != null ? item[col.key] : "");
-      });
-      return row;
-    });
-  
-    // Create worksheet and workbook
-    const ws_data = [header, ...dataRows];
-    const ws = XLSX.utils.aoa_to_sheet(ws_data);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Selected Data");
-    XLSX.writeFile(wb, "selected_rows.xlsx");
+  if (selectedRows.size === 0) {
+    alert("No rows selected to export.");
+    return;
   }
 
-  function exportAllRowsToXLSX() {
-    if (!tableData || tableData.length === 0) {
-      alert("No data to export.");
-      return;
-    }
-    
-    // Use the columns that are visible (or adjust if you want all columns)
-    const activeCols = columns.filter(c => visibleColumns.includes(c.key));
-    const header = ["Index", ...activeCols.map(c => c.label)];
-    
-    const dataRows = tableData.map((item, index) => {
-      const row = [index + 1];
-      activeCols.forEach(col => {
-        row.push(item[col.key] != null ? item[col.key] : "");
-      });
-      return row;
+  // Build an array of selected items
+  const selectedItems = Array.from(selectedRows).map(idx => tableData[idx]);
+  const activeCols = columns.filter(c => visibleColumns.includes(c.key));
+  const header = ["Index", ...activeCols.map(c => c.label)];
+
+  const dataRows = selectedItems.map((item, i) => {
+    const row = [i + 1];
+    activeCols.forEach(col => {
+      row.push(item[col.key] != null ? item[col.key] : "");
     });
-    
-    // Build the array of arrays (aoa) for the sheet
-    const ws_data = [header, ...dataRows];
-    const ws = XLSX.utils.aoa_to_sheet(ws_data);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "All Data");
-    XLSX.writeFile(wb, "all_data.xlsx");
+    return row;
+  });
+
+  const ws_data = [header, ...dataRows];
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Selected Data");
+  XLSX.writeFile(wb, "selected_rows.xlsx");
+
+}
+
+function exportAllRowsToXLSX() {
+  if (!tableData || tableData.length === 0) {
+    alert("No data to export.");
+    return;
   }
-  
-  
+
+  // Use the columns that are visible (or adjust if you want all columns)
+  const activeCols = columns.filter(c => visibleColumns.includes(c.key));
+  const header = ["Index", ...activeCols.map(c => c.label)];
+
+  const dataRows = tableData.map((item, index) => {
+    const row = [index + 1];
+    activeCols.forEach(col => {
+      row.push(item[col.key] != null ? item[col.key] : "");
+    });
+    return row;
+  });
+
+  const ws_data = [header, ...dataRows];
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "All Data");
+  XLSX.writeFile(wb, "all_data.xlsx");
+
+}
+
+
 
 // Attach event listeners (pagination, show/hide columns, select all, row checkboxes, etc.)
 function attachEventListeners() {
@@ -651,9 +703,9 @@ function attachEventListeners() {
       else if (e.target.dataset.key) {
         const key = e.target.dataset.key;
         updateColumnVisibility(key, e.target.checked);
-        
+
         // Update the parent group checkbox state
-        const groupDiv = e.target.closest("div").parentElement; // Container that holds the parent checkbox and children
+        const groupDiv = e.target.closest("div").parentElement;
         if (groupDiv) {
           const groupCheckbox = groupDiv.querySelector("input[type='checkbox'][data-group]");
           if (groupCheckbox) {
@@ -664,66 +716,71 @@ function attachEventListeners() {
         }
       }
     }
+
   });
-  
+
 
   // Filter
-  document.getElementById("filterBtn").addEventListener("click", function() {
+  document.getElementById("filterBtn").addEventListener("click", function () {
     const filterSection = document.getElementById("filterSection");
     if (filterSection.style.display === "none" || filterSection.style.display === "") {
       filterSection.style.display = "block";
     } else {
       filterSection.style.display = "none";
     }
-  });  
+  });
 
   // Pagination
-  document.getElementById("prevPageBtn").addEventListener("click", () => {
+  // Replacing the buttons to clear all previous listeners
+  const prevOld = document.getElementById("prevPageBtn");
+  const prevNew = prevOld.cloneNode(true);
+  prevOld.replaceWith(prevNew);
+  prevNew.addEventListener("click", () => {
     prevPage();
-    // re-check row checkboxes as needed
     attachRowCheckboxListeners();
   });
-  document.getElementById("nextPageBtn").addEventListener("click", () => {
+
+  const nextOld = document.getElementById("nextPageBtn");
+  const nextNew = nextOld.cloneNode(true);
+  nextOld.replaceWith(nextNew);
+  nextNew.addEventListener("click", () => {
     nextPage();
-    // re-check row checkboxes as needed
     attachRowCheckboxListeners();
   });
+
 
   // Attach event listener to the "Zoom to" button
-document.getElementById("zoomToBtn").addEventListener("click", function() {
-  // Get the selected row indices (assuming selectedRows is a Set holding the indices)
-  const selectedIndices = Array.from(selectedRows);
-  if (selectedIndices.length === 0) {
-    alert("Please select at least one property.");
-    return;
-  }
-  
-  // For this example, we zoom to the first selected property.
-  const idx = selectedIndices[0];
-  const property = tableData[idx]; // correct
+  document.getElementById("zoomToBtn").addEventListener("click", function () {
+    // Get the selected row indices (assuming selectedRows is a Set holding the indices)
+    const selectedIndices = Array.from(selectedRows);
+    if (selectedIndices.length === 0) {
+      alert("Please select at least one property.");
+      return;
+    }
 
-  // Check if the property has polygon geometry
-  if (property.geometry_coordinates && property.geometry_coordinates.length > 0) {
-    const coords = property.geometry_coordinates[0][0];
-    const polygon = new window.Polygon({
-      rings: coords,
-      spatialReference: { wkid: 4326 }
-    });
-    window.view.goTo({ target: polygon, zoom: 16 }).catch(err => console.error("Error zooming:", err));
-  }
-  // Otherwise, if the property has a point geometry
-  else if (property.coord_point) {
-    const [longitude, latitude] = property.coord_point;
-    const point = new window.Point({
-      longitude: longitude,
-      latitude: latitude
-    });
-    window.view.goTo({ target: point, zoom: 16 }).catch(err => console.error("Error zooming:", err));
-  }
-  else {
-    alert("Selected property does not have valid geometry.");
-  }
-});
+    // Zoom to the last selected property.
+    const idx = selectedIndices[selectedIndices.length - 1];
+    const property = tableData[idx];
+
+    if (property.geometry_coordinates && property.geometry_coordinates.length > 0) {
+      const coords = property.geometry_coordinates[0][0];
+      const polygon = new window.Polygon({
+        rings: coords,
+        spatialReference: { wkid: 4326 }
+      });
+      window.view.goTo({ target: polygon, zoom: 16 }).catch(err => console.error("Error zooming:", err));
+    } else if (property.coord_point) {
+      const [longitude, latitude] = property.coord_point;
+      const point = new window.Point({
+        longitude: longitude,
+        latitude: latitude
+      });
+      window.view.goTo({ target: point, zoom: 16 }).catch(err => console.error("Error zooming:", err));
+    } else {
+      alert("Selected property does not have valid geometry.");
+    }
+
+  });
 
 
   // Export button
@@ -742,33 +799,31 @@ function attachRowCheckboxListeners() {
   // "Select all" in the header
   const selectAllEl = document.getElementById("selectAllRows");
   if (selectAllEl) {
-    selectAllEl.addEventListener("change", function() {
+    selectAllEl.addEventListener("change", function () {
       // Determine which rows are currently on this page
       const startIdx = (currentPage - 1) * pageSize;
       const endIdx = Math.min(startIdx + pageSize, tableData.length);
 
       if (this.checked) {
-        // Add them all to selectedRows
         for (let i = startIdx; i < endIdx; i++) {
           selectedRows.add(i);
         }
       } else {
-        // Remove them from selectedRows
         for (let i = startIdx; i < endIdx; i++) {
           selectedRows.delete(i);
         }
       }
-      // Re-check all row checkboxes
       document.querySelectorAll(".row-checkbox").forEach(cb => {
         cb.checked = selectAllEl.checked;
       });
       updateTableHeaderLabels();
     });
+
   }
 
   // Individual row checkboxes
   document.querySelectorAll(".row-checkbox").forEach(cb => {
-    cb.addEventListener("change", function() {
+    cb.addEventListener("change", function () {
       const idx = parseInt(this.dataset.index, 10);
       if (this.checked) {
         selectedRows.add(idx);
@@ -804,14 +859,14 @@ function checkSelectAllState() {
 }
 
 function toggleAdvancedTable() {
-    const container = document.getElementById("advancedTableContainer");
-    if (container.style.display === "none" || container.style.display === "") {
-      container.style.display = "block";
-    } else {
-      container.style.display = "none";
-    }
+  const container = document.getElementById("advancedTableContainer");
+  if (container.style.display === "none" || container.style.display === "") {
+    container.style.display = "block";
+  } else {
+    container.style.display = "none";
   }
-  
+}
+
 
 // Example: call initCustomTable after fetching data
 // fetch("http://localhost:5010/properties")
@@ -821,3 +876,4 @@ function toggleAdvancedTable() {
 //     initCustomTable(data);
 //   })
 //   .catch(err => console.error(err));
+

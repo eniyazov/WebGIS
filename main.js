@@ -29,6 +29,37 @@ require([
       "Otel": "hotelsSubLayer"
   };
 
+  const subcategoryColors = {
+  "Building": { color: [128, 0, 0, 0.7], outline: "#800000" },
+  "Land": { color: [102, 51, 0, 0.5], outline: "#663300" },
+  "Mixed use": { color: [16, 48, 94, 0.6], outline: "#10305e" },
+  "Office": { color: [66, 135, 245, 0.7], outline: "#4287f5" },
+  "Parking Building": { color: [102, 0, 204, 0.7], outline: "#6600cc" },
+  "Parking space": { color: [189, 189, 189, 0.7], outline: "#bdbdbd" },
+  "Residential": { color: [215, 25, 28, 0.6], outline: "#d7191c" },
+  "Single Family Houses": { color: [128, 0, 64, 0.7], outline: "#800040" },
+  "Street Retail": { color: [41, 98, 255, 0.7], outline: "#2962ff" },
+  "Unit": { color: [107, 142, 35, 0.7], outline: "#6b8e23" },
+  "Warehouse": { color: [18, 165, 133, 0.7], outline: "#0f6f59" },
+  "Hotel": { color: [0, 255, 255, 1], outline: "#00ffff" }, // Neon Cyan,
+  "Apartments": { color: [153, 50, 204, 0.7], outline: "#9932cc" },
+  "Cip": {color: [67,69,11,1], outline: "#ffffff" },
+  "Pitstop": { color: [70, 130, 180, 0.7], outline: "#4682b4" },
+  "Foton": { color: [255, 105, 180, 0.7], outline: "#ff69b4" },   // Hot Pink
+  "Top": { color: [0, 191, 255, 0.7], outline: "#00bfff" }        // Deep Sky Blue
+};
+
+const propertyTypeColors = {
+  "Əmlak kompleksi": { color: "#dc4b00cc", outline: "#dc4b00ff" },
+  "Qeyri-yaşayış binası": { color: "#3c6ccc80", outline: "#3c6cccff" },
+  "Çoxmərtəbəli yaşayış bina": { color: "#d9dc00cc", outline: "#d9dc00ff" },
+  "Torpaq sahəsi": { color: "#8B4513cc", outline: "#8B4513ff" },
+  "Fərdi yaşayış evi": { color: "#1a9641cc", outline: "#1a9641ff" },
+  "Qeyri-yaşayış sahəsi": { color: "#d99f00cc", outline: "#d99f00ff" },
+  "Mənzil": { color: "#4db478cc", outline: "#4db478ff" }
+};
+
+
   // Create the map
   const map = new Map({
     basemap: "streets-navigation-vector"
@@ -58,12 +89,184 @@ require([
   window.Polygon = Polygon;
   window.Point = Point;
   
+  fetch("http://localhost:5010/grouped-layers")
+  .then(res => res.json())
+  .then(buildGroupedLayerList)
+  .catch(err => console.error("Failed to load grouped layers", err));
+
   // Create Basemap Gallery widget
   let basemapGallery = new BasemapGallery({ view: activeView });
   let basemapExpand = new Expand({ view: activeView, content: basemapGallery });
   activeView.ui.add(basemapExpand, "top-right");
 
 
+function buildGroupedLayerList(groupedData) {
+  const container = document.getElementById("groupedLayerList");
+  container.innerHTML = "";
+
+  groupedData.forEach(group => {
+    const ownerId = `owner-${group.owner.replace(/\s+/g, "_")}`;
+    const ownerDiv = document.createElement("div");
+    ownerDiv.className = "layer-item";
+
+    const ownerToggle = document.createElement("span");
+    ownerToggle.className = "toggle-btn";
+    ownerToggle.textContent = "▶";
+    ownerToggle.onclick = e => toggleNested(`cat-${ownerId}`, ownerToggle, e);
+
+    const ownerCheckbox = document.createElement("input");
+    ownerCheckbox.type = "checkbox";
+    ownerCheckbox.id = ownerId;
+    ownerCheckbox.dataset.owner = group.owner; // ✅ Add this line
+
+    const ownerLabel = document.createElement("label");
+    ownerLabel.htmlFor = ownerId;
+    ownerLabel.textContent = group.owner;
+
+    const categoryContainer = document.createElement("div");
+    categoryContainer.className = "nested";
+    categoryContainer.id = `cat-${ownerId}`;
+
+    group.categories.forEach(cat => {
+      const catId = `cat-${ownerId}-${cat.category.replace(/\s+/g, "_")}`;
+      const catDiv = document.createElement("div");
+      catDiv.className = "layer-item";
+
+      const catToggle = document.createElement("span");
+      catToggle.className = "toggle-btn";
+      catToggle.textContent = "▶";
+      catToggle.onclick = e => toggleNested(`sub-${catId}`, catToggle, e);
+
+      const catCheckbox = document.createElement("input");
+      catCheckbox.type = "checkbox";
+      catCheckbox.id = catId;
+
+      const catLabel = document.createElement("label");
+      catLabel.htmlFor = catId;
+      catLabel.textContent = cat.category;
+
+      const subContainer = document.createElement("div");
+      subContainer.className = "nested";
+      subContainer.id = `sub-${catId}`;
+
+      cat.subcategories.forEach(sub => {
+        const subId = `${catId}-${sub.replace(/\s+/g, "_")}`;
+        const subDiv = document.createElement("div");
+        subDiv.className = "layer-item";
+
+        const subCheckbox = document.createElement("input");
+        subCheckbox.type = "checkbox";
+        subCheckbox.id = subId;
+        subCheckbox.dataset.owner = group.owner;
+        subCheckbox.dataset.category = cat.category;
+        subCheckbox.dataset.subcategory = sub;
+
+        const subLabel = document.createElement("label");
+        subLabel.htmlFor = subId;
+        subLabel.textContent = sub;
+
+        subCheckbox.addEventListener("change", () => {
+          updateMapFromGroupedLayers();
+
+          // Sync parent checkbox state for category
+          const allSubCheckboxes = subContainer.querySelectorAll("input[type='checkbox']");
+          const allChecked = Array.from(allSubCheckboxes).every(cb => cb.checked);
+          const someChecked = Array.from(allSubCheckboxes).some(cb => cb.checked);
+          catCheckbox.checked = allChecked;
+          catCheckbox.indeterminate = !allChecked && someChecked;
+
+          // Sync parent checkbox state for owner
+          const allCatCheckboxes = categoryContainer.querySelectorAll("input[type='checkbox']");
+          const allCatChecked = Array.from(allCatCheckboxes).every(cb => cb.checked);
+          const someCatChecked = Array.from(allCatCheckboxes).some(cb => cb.checked);
+          ownerCheckbox.checked = allCatChecked;
+          ownerCheckbox.indeterminate = !allCatChecked && someCatChecked;
+        });
+
+        subDiv.appendChild(subCheckbox);
+        subDiv.appendChild(subLabel);
+        subContainer.appendChild(subDiv);
+      });
+
+      catCheckbox.addEventListener("change", () => {
+        subContainer.querySelectorAll("input[type='checkbox']").forEach(cb => cb.checked = catCheckbox.checked);
+        catCheckbox.indeterminate = false;
+        updateMapFromGroupedLayers();
+
+        // Update owner
+        const allCatCheckboxes = categoryContainer.querySelectorAll("input[type='checkbox']");
+        const allCatChecked = Array.from(allCatCheckboxes).every(cb => cb.checked);
+        const someCatChecked = Array.from(allCatCheckboxes).some(cb => cb.checked);
+        ownerCheckbox.checked = allCatChecked;
+        ownerCheckbox.indeterminate = !allCatChecked && someCatChecked;
+      });
+
+      catDiv.appendChild(catToggle);
+      catDiv.appendChild(catCheckbox);
+      catDiv.appendChild(catLabel);
+      catDiv.appendChild(subContainer);
+      categoryContainer.appendChild(catDiv);
+    });
+
+    ownerCheckbox.addEventListener("change", () => {
+      categoryContainer.querySelectorAll("input[type='checkbox']").forEach(cb => {
+        cb.checked = ownerCheckbox.checked;
+        cb.indeterminate = false;
+      });
+      ownerCheckbox.indeterminate = false;
+      updateMapFromGroupedLayers();
+    });
+
+    ownerDiv.appendChild(ownerToggle);
+    ownerDiv.appendChild(ownerCheckbox);
+    ownerDiv.appendChild(ownerLabel);
+    container.appendChild(ownerDiv);
+    container.appendChild(categoryContainer);
+  });
+}
+
+
+////////////////////////////////////////////////////////////////////
+
+function updateMapFromGroupedLayers() {
+  const selectedSub = Array.from(document.querySelectorAll('#groupedLayerList input[type="checkbox"]:checked'))
+    .filter(cb => cb.dataset.owner && cb.dataset.category && cb.dataset.subcategory)
+    .map(cb => ({
+      owner: cb.dataset.owner,
+      category: cb.dataset.category,
+      subcategory: cb.dataset.subcategory
+    }));
+
+  if (selectedSub.length === 0) {
+    window.view.graphics.removeAll();
+    updateCustomTable([]);
+    window.allTableData = [];
+    return;
+  }
+
+  const owners = [...new Set(selectedSub.map(s => s.owner))];
+  const categories = [...new Set(selectedSub.map(s => s.category))];
+  const subcategories = [...new Set(selectedSub.map(s => s.subcategory))];
+
+  const query = new URLSearchParams();
+  query.set('owner', owners.join(','));
+  query.set('category', categories.join(','));
+  query.set('subcategory', subcategories.join(','));
+
+  fetch(`http://localhost:5010/properties?${query.toString()}`)
+    .then(res => res.json())
+    .then(filtered => {
+      window.view.graphics.removeAll();
+      renderProperties(filtered);
+      updateCustomTable(filtered);
+      window.allTableData = filtered;
+    })
+    .catch(err => console.error("Failed to update map for grouped layers", err));
+}
+
+
+
+////////////////////////////////////////////////////////////////////
 
 
   let print = new Print({
@@ -208,88 +411,129 @@ function clearMeasurements() {
 
   
   // Function to render properties on the map
-  function renderProperties(properties) {
-    activeView.graphics.removeAll();
-    
-    properties.forEach(property => {
-      let graphic;
-  
-      // Create a polygon graphic if geometry_coordinates exists
-      if (property.geometry_coordinates && property.geometry_coordinates.length > 0) {
-        const coordinates = property.geometry_coordinates[0][0];
-        const polygon = new Polygon({
-          rings: coordinates,
-          spatialReference: { wkid: 4326 }
-        });
-  
-        graphic = new Graphic({
-          geometry: polygon,
-          attributes: {
-            Project: property.project,
-            Owner: property.owner,
-            Street: property.street,
-            Special_co: property.special_co,
-            Total_area: property.total_area,
-            Land_area_: property.land_area
-          },
-          symbol: {
-            type: "simple-fill",
-            color: [255, 165, 0, 0.6],
-            outline: { color: "black", width: 1 }
-          },
-          popupTemplate: {
-            title: "{Project}",
-            content: `
-              <b>Owner:</b> {Owner} <br>
-              <b>Address:</b> {Street} <br>
-              <b>Special code:</b> {Special_co} <br>
-              <b>Total Area:</b> {Total_area} m² <br>
-              <b>Land Area:</b> {Land_area_} ha <br>
-            `
+function renderProperties(properties) {
+  activeView.graphics.removeAll();
+
+  properties.forEach(property => {
+    let graphic;
+
+    // Helper to get color scheme
+    const getColorScheme = (property) => {
+      if (property.subcategory && subcategoryColors[property.subcategory]) {
+        return {
+          color: subcategoryColors[property.subcategory].color,
+          outline: {
+            color: subcategoryColors[property.subcategory].outline,
+            width: 1.5
           }
-        });
-      }
-      // Otherwise, if there is a point geometry
-      else if (property.coord_point) {
-        const [longitude, latitude] = property.coord_point;
-        const point = new Point({
-          longitude: longitude,
-          latitude: latitude
-        });
-  
-        graphic = new Graphic({
-          geometry: point,
-          attributes: {
-            Project: property.project,
-            Owner: property.owner,
-            Street: property.street,
-            Special_co: property.special_co,
-            Total_area: property.total_area,
-            Land_area_: property.land_area
-          },
-          symbol: {
-            type: "simple-marker",
-            color: [0, 0, 255],
-            size: "10px"
-          },
-          popupTemplate: {
-            title: "{Project}",
-            content: `
-              <b>Owner:</b> {Owner} <br>
-              <b>Address:</b> {Street} <br>
-              <b>Special code:</b> {Special_co} <br>
-              <b>Total Area:</b> {Total_area} m² <br>
-              <b>Land Area:</b> {Land_area_} ha <br>
-            `
+        };
+      } else if (property.property_type && propertyTypeColors[property.property_type]) {
+        return {
+          color: propertyTypeColors[property.property_type].color,
+          outline: {
+            color: propertyTypeColors[property.property_type].outline,
+            width: 1.5
           }
-        });
+        };
       }
-  
-      if (graphic) {
-        activeView.graphics.add(graphic);
-      }
-    });
-  }
+      return {
+        color: [255, 165, 0, 0.6],
+        outline: {
+          color: "black",
+          width: 1
+        }
+      };
+    };
+
+    const style = getColorScheme(property);
+
+    if (property.geometry_coordinates && property.geometry_coordinates.length > 0) {
+      const coordinates = property.geometry_coordinates[0][0];
+      const polygon = new Polygon({
+        rings: coordinates,
+        spatialReference: { wkid: 4326 }
+      });
+
+      graphic = new Graphic({
+        geometry: polygon,
+        attributes: {
+          Project: property.project,
+          Owner: property.owner,
+          Address: property.address,
+          Value: property.book_value,
+          Subcategory: property.subcategory,
+          Use_type: property.property_use_type,
+          Special_co: property.special_co,
+          Total_area: property.total_area,
+          Land_area_: property.land_area
+        },
+        symbol: {
+          type: "simple-fill",
+          color: style.color,
+          outline: style.outline
+        },
+        popupTemplate: {
+          title: "{Project}",
+          content: `
+            <b>Owner:</b> {Owner} <br>
+            <b>Value:</b> {Value} <br>
+            <b>Address:</b> {Address} <br>
+            <b>Subcategory:</b> {Subcategory} <br>
+            <b>Use Type:</b> {Use_type} <br>
+            <b>Special code:</b> {Special_co} <br>
+            <b>Total Area:</b> {Total_area} m² <br>
+            <b>Land Area:</b> {Land_area_} ha <br>
+          `
+        }
+      });
+    } else if (property.coord_point) {
+      const [longitude, latitude] = property.coord_point;
+      const point = new Point({
+        longitude: longitude,
+        latitude: latitude
+      });
+
+      graphic = new Graphic({
+        geometry: point,
+        attributes: {
+          Project: property.project,
+          Owner: property.owner,
+          Address: property.address,
+          Value: property.book_value,
+          Subcategory: property.subcategory,
+          Use_type: property.property_use_type,
+          Special_co: property.special_co,
+          Total_area: property.total_area,
+          Land_area_: property.land_area
+        },
+        symbol: {
+          type: "simple-marker",
+          color: style.color,
+          size: "10px",
+          outline: style.outline
+        },
+        popupTemplate: {
+          title: "{Project}",
+          content: `
+            <b>Owner:</b> {Owner} <br>
+            <b>Value:</b> {Value} <br>
+            <b>Address:</b> {Address} <br>
+            <b>Subcategory:</b> {Subcategory} <br>
+            <b>Use Type:</b> {Use_type} <br>
+            <b>Special code:</b> {Special_co} <br>
+            <b>Total Area:</b> {Total_area} m² <br>
+            <b>Land Area:</b> {Land_area_} ha <br>
+          `
+        }
+      });
+    }
+
+    if (graphic) {
+      activeView.graphics.add(graphic);
+    }
+  });
+}
+
 
   window.renderProperties = renderProperties;
 
@@ -460,4 +704,109 @@ fetch(`http://localhost:5010/properties?propertyTypes=${typesQuery}`)
     });
   }
 
+});
+
+
+window.toggleLayerGroup = function(event) {
+  event.preventDefault();
+
+  const grouped = document.getElementById("groupedLayerList");
+  const staticList = document.getElementById("staticLayerList");
+
+  document.querySelectorAll('.layer-list input[type="checkbox"]').forEach(cb => cb.checked = false);
+  window.view.graphics.removeAll();
+  updateCustomTable([]);
+  window.allTableData = [];
+
+  if (grouped.style.display === "none" || grouped.style.display === "") {
+    grouped.style.display = "block";
+    staticList.style.display = "none";
+  } else {
+    grouped.style.display = "none";
+    staticList.style.display = "block";
+  }
+};
+
+window.toggleNested = function(containerId, arrowEl, event) {
+  event.stopPropagation();
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  if (container.style.display === "none" || container.style.display === "") {
+    container.style.display = "block";
+    if (arrowEl) arrowEl.textContent = "▼";
+  } else {
+    container.style.display = "none";
+    if (arrowEl) arrowEl.textContent = "▶";
+  }
+};
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const panel = document.getElementById("colorInfoPanel");
+  const content = document.getElementById("colorInfoContent");
+  const trigger = document.querySelector(".color-info");
+
+  const subcategoryColors = {
+    "Building": { color: [128, 0, 0, 0.7], outline: "#800000" },
+    "Land": { color: [102, 51, 0, 0.5], outline: "#663300" },
+    "Mixed use": { color: [16, 48, 94, 0.6], outline: "#10305e" },
+    "Office": { color: [66, 135, 245, 0.7], outline: "#4287f5" },
+    "Parking Building": { color: [102, 0, 204, 0.7], outline: "#6600cc" },
+    "Parking space": { color: [189, 189, 189, 0.7], outline: "#bdbdbd" },
+    "Residential": { color: [215, 25, 28, 0.6], outline: "#d7191c" },
+    "Single Family Houses": { color: [128, 0, 64, 0.7], outline: "#800040" },
+    "Street Retail": { color: [41, 98, 255, 0.7], outline: "#2962ff" },
+    "Unit": { color: [107, 142, 35, 0.7], outline: "#6b8e23" },
+    "Warehouse": { color: [18, 165, 133, 0.7], outline: "#0f6f59" },
+    "Hotel": { color: [0, 255, 255, 1], outline: "#00ffff" },
+    "Apartments": { color: [153, 50, 204, 0.7], outline: "#9932cc" },
+    "Cip": {color: [67,69,11,1], outline: "#ffffff" },
+    "Pitstop": { color: [70, 130, 180, 0.7], outline: "#4682b4" },
+    "Foton": { color: [255, 105, 180, 0.7], outline: "#ff69b4" },   // Hot Pink
+    "Top": { color: [0, 191, 255, 0.7], outline: "#00bfff" }        // Deep Sky Blue
+  };
+
+  function rgbaArrayToCss(rgba) {
+    const [r, g, b, a] = rgba;
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+  }
+
+  function generateColorList() {
+    content.innerHTML = ""; // Clear previous
+    Object.entries(subcategoryColors).forEach(([key, val]) => {
+      const line = document.createElement("div");
+      line.style.display = "flex";
+      line.style.alignItems = "center";
+      line.style.marginBottom = "6px";
+
+      const circle = document.createElement("div");
+      circle.style.width = "14px";
+      circle.style.height = "14px";
+      circle.style.borderRadius = "50%";
+      circle.style.marginRight = "10px";
+      circle.style.border = "1px solid #aaa";
+      circle.style.backgroundColor = rgbaArrayToCss(val.color);
+
+      const label = document.createElement("span");
+      label.textContent = key;
+      label.style.fontSize = "13px";
+
+      line.appendChild(circle);
+      line.appendChild(label);
+      content.appendChild(line);
+    });
+  }
+
+  if (trigger) {
+    trigger.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (panel.style.display === "none" || panel.style.display === "") {
+        generateColorList();
+        panel.style.display = "block";
+      } else {
+        panel.style.display = "none";
+      }
+    });
+  }
 });
