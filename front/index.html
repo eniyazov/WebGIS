@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>GIS</title>
+
+  <!-- Sənin əsas stilin -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- ArcGIS tema -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css" />
+
+  <script>
+    window.Loader = {
+      show: function () {
+        document.getElementById("appLoader")?.classList.remove("is-hidden");
+      },
+      hide: function () {
+        document.getElementById("appLoader")?.classList.add("is-hidden");
+      }
+    };
+  </script>
+
+  <!-- Konfiqurasiya əvvəl yüklənsin -->
+  <script src="./assets/js/config.js"></script>
+  <!-- Auth sonra yüklənsin -->
+  <script src="./assets/js/auth.js" defer></script>
+
+
+</head>
+
+<body>
+  <!-- Universal Loader -->
+  <div id="appLoader" class="app-loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="loginOverlay" class="login-overlay">
+    <div id="particles-js"></div>
+
+    <div class="login-card">
+      <h2 class="login-title">Login</h2>
+
+      <input id="loginUsername" class="login-input" type="text" placeholder="Username" autocomplete="username" />
+      <input id="loginPassword" class="login-input" type="password" placeholder="Password"
+        autocomplete="current-password" />
+
+      <div id="loginError" class="login-error is-hidden"></div>
+
+      <div class="login-hint">Demo login: <strong>test</strong> / <strong>test123</strong></div>
+
+      <button id="loginBtn" class="login-btn">Login</button>
+    </div>
+  </div>
+
+  <!-- APP: loginə qədər gizlidir -->
+  <div id="appRoot" class="app-hidden">
+
+    <!-- header -->
+    <header id="header" class="header-container">
+      <div class="logo-box">
+        <a href="#"><img src="img/logo.svg" alt="Logo"></a>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search by Owner or Address">
+        <ul id="suggestionList"></ul>
+      </div>
+      <div class="view-toggle">
+        <span id="userFullName" class="user-fullname" style="margin-right:12px;"></span>
+        <button id="switch-btn">2D</button>
+        <button id="logoutBtn" title="Logout">Logout</button>
+      </div>
+
+    </header>
+
+    <div id="map"></div>
+
+    <div id="advancedTableContainer">
+      <div id="tableHeader">
+        <div><span id="tableTitle">GeoJSON (Total: 0) (Selector: 0)</span></div>
+        <div>
+          <button id="zoomToBtn">Zoom to</button>
+          <button id="filterBtn">Filter</button>
+          <button id="showHideColumnsBtn">Show/Hide columns</button>
+          <button id="exportSelectedBtn">Export Selected</button>
+          <button id="exportAllBtn">Export All</button>
+
+          <button id="closeTableBtn"  onclick="toggleAdvancedTable(); return false;" class="table-close-btn" title="Close table">✖</button>
+        </div>
+      </div>
+      <div id="columnsPanel"></div>
+      <div id="tableScrollWrapper">
+        <table id="customTable" border="1" style="border-collapse:collapse; width:100%;"></table>
+      </div>
+    </div>
+
+    <div id="toolbar" class="esri-component esri-widget">
+      <button id="distance" class="esri-widget--button esri-interactive esri-icon-measure-line"
+        title="Distance Measurement Tool"></button>
+      <button id="area" class="esri-widget--button esri-interactive esri-icon-measure-area"
+        title="Area Measurement Tool"></button>
+      <button id="clear" class="esri-widget--button esri-interactive esri-icon-trash"
+        title="Clear Measurements"></button>
+    </div>
+
+    <div id="measurementResults">
+      <strong>Measurement Results:</strong>
+      <div id="resultsContent"></div>
+    </div>
+
+    <div id="colorInfoPanel">
+      <strong style="font-size:16px;">Subcategory Colors</strong>
+      <div id="colorInfoContent" style="margin-top:10px;"></div>
+    </div>
+
+    <arcgis-locate position="bottom"></arcgis-locate>
+
+    <!-- Bottom toolbar -->
+    <div id="buttons" class="display-flex align-item-center justify-content-center buttons">
+
+      <!-- maps -->
+      <div>
+        <div class="title">Maps</div>
+        <a href="#"><img id="mapIcon" style="height:30px" src="img/maps.png" alt=""></a>
+      </div>
+
+      <!-- layers -->
+      <div id="toggleButton">
+        <div class="title">Layers</div>
+        <a href="#" id="ToggleBtn" onclick="toggleLayerList(event)">
+          <img style="height:30px" src="img/layers.png" alt="Layers">
+        </a>
+
+
+      </div>
+
+      <!-- Table -->
+      <div class="attrib-table">
+        <div class="title">Table</div>
+        <a onclick="toggleAdvancedTable(); return false;">
+          <img style="height:30px" src="img/attrib.png" alt="">
+        </a>
+      </div>
+
+
+
+      <div>
+        <a><img style="height:30px" src="img/people.png" alt=""></a>
+      </div>
+      <div>
+        <a><img style="height:30px" src="img/icon_icon.png" alt=""></a>
+      </div>
+      <div class="color-info">
+        <div class="title">Colors</div>
+        <a id="colorIcon">
+          <img style="height:30px" src="img/color.png" alt="">
+        </a>
+      </div>
+
+
+      <div>
+        <div class="title">Print</div>
+        <a id="printIcon"><img id="print" style="height:30px" src="img/print.png" alt=""></a>
+      </div>
+      <div>
+        <a href="#" id="measureIcon"><img id="measure" style="height:30px" src="img/help.png" alt=""></a>
+      </div>
+
+      <div class="coords" id="coordinateDisplay"><span id="coordinateText">Lat: 0.000000, Lon: 0.000000</span></div>
+    </div>
+
+    <!-- layers -->
+    <div class="layer-list">
+      <div class="layer-header">
+        <div class="header-top">
+          <span class="header-title">📌 Layer List</span>
+          <span onclick="toggleLayerList(event)" class="close-btn">✕</span>
+        </div>
+        <div class="filter-selector">
+          <label class="filter-radio">
+            <input type="radio" name="filterBy" value="type" checked onchange="handleFilterChange(event)">
+            <span>Type-ə görə</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="groupedLayerList" style="display:none;"></div>
+
+      <div id="staticLayerList">
+        <!-- ... sənin statik layer check-lərin (dəyişmədim) ... -->
+        <!-- Non-Residential / Residential / Lands / Property Compounds / Hotels -->
+        <!-- (mövcud HTML-in eyni saxlanılıb) -->
+        <div class="layer-item">
+          <span class="toggle-btn" onclick="toggleNested('mapLayers', this, event)">▶</span>
+          <input type="checkbox" id="investmentProperty" onclick="toggleCheckbox('mapLayers', this, event)">
+          <label for="investmentProperty">Investment Property</label>
+        </div>
+
+        <div id="mapLayers" class="nested">
+          <div class="layer-item">
+            <span class="toggle-btn" onclick="toggleNested('nonResidential', this, event)">▶</span>
+            <input type="checkbox" id="nonResidentialLayer" onclick="toggleCheckbox('nonResidential', this, event)">
+            <label for="nonResidentialLayer">Non-Residential</label>
+          </div>
+          <div id="nonResidential" class="nested">
+            <div class="layer-item">
+              <input type="checkbox" id="nonResidentialBuildings" onclick="toggleCheckbox('', this, event)">
+              <label for="nonResidentialBuildings">Non-Residential Buildings</label>
+            </div>
+            <div class="layer-item">
+              <input type="checkbox" id="nonResidentialPremises" onclick="toggleCheckbox('', this, event)">
+              <label for="nonResidentialPremises">Non-Residential Premises</label>
+            </div>
+          </div>
+
+          <div class="layer-item">
+            <span class="toggle-btn" onclick="toggleNested('residential', this, event)">▶</span>
+            <input type="checkbox" id="residentialLayer" onclick="toggleCheckbox('residential', this, event)">
+            <label for="residentialLayer">Residential</label>
+          </div>
+          <div id="residential" class="nested">
+            <div class="layer-item">
+              <input type="checkbox" id="apartmentsLayer" onclick="toggleCheckbox('', this, event)">
+              <label for="apartmentsLayer">Apartments</label>
+            </div>
+            <div class="layer-item">
+              <input type="checkbox" id="residentialGroup" onclick="toggleCheckbox('', this, event)">
+              <label for="residentialGroup">Residential</label>
+            </div>
+            <div class="layer-item">
+              <input type="checkbox" id="singleFamilyHouses" onclick="toggleCheckbox('', this, event)">
+              <label for="singleFamilyHouses">Single Family Houses</label>
+            </div>
+          </div>
+
+          <div class="layer-item">
+            <span class="toggle-btn" onclick="toggleNested('lands', this, event)">▶</span>
+            <input type="checkbox" id="landsLayer" onclick="toggleCheckbox('lands', this, event)">
+            <label for="landsLayer">Lands</label>
+          </div>
+          <div id="lands" class="nested">
+            <div class="layer-item">
+              <input type="checkbox" id="landsSubLayer" onclick="toggleCheckbox('', this, event)">
+              <label for="landsSubLayer">Lands</label>
+            </div>
+          </div>
+
+          <div class="layer-item">
+            <span class="toggle-btn" onclick="toggleNested('propertyCompounds', this, event)">▶</span>
+            <input type="checkbox" id="propertyCompoundsLayer"
+              onclick="toggleCheckbox('propertyCompounds', this, event)">
+            <label for="propertyCompoundsLayer">Property Compounds</label>
+          </div>
+          <div id="propertyCompounds" class="nested">
+            <div class="layer-item">
+              <input type="checkbox" id="propertyCompoundsSubLayer" onclick="toggleCheckbox('', this, event)">
+              <label for="propertyCompoundsSubLayer">Property Compounds</label>
+            </div>
+          </div>
+        </div><!-- /#mapLayers -->
+      </div><!-- /#staticLayerList -->
+    </div>
+  </div><!-- /#appRoot -->
+
+  <!-- Kitabxanalar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://js.arcgis.com/4.31/"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
+
+  <!-- App skriptləri -->
+  <script src="./assets/js/main.js" defer></script>
+  <script>
+    (function () {
+      function renderName() {
+        var el = document.getElementById('userFullName');
+        if (!el || !window.Auth || !window.Auth.getUser) return;
+        var u = window.Auth.getUser();
+        // Backenddən gələn açar "fullname"dir (bax: nümunə data)
+        el.textContent = (u && (u.fullname || u.fullName)) ? (u.fullname || u.fullName) : '';
+      }
+
+      // Login zamanı və səhifə ilk yüklənəndə ad yazılsın
+      document.addEventListener('auth:login', renderName);
+      document.addEventListener('DOMContentLoaded', renderName);
+    })();
+  </script>
+  <script src="./assets/js/controls.js" defer></script>
+  <script src="./assets/js/particles.js" defer></script>
+  <script src="./assets/js/table.js" defer></script>
+</body>
+
+</html>
