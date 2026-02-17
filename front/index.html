@@ -195,55 +195,63 @@
         <div class="layer-item">
           <span class="toggle-btn" onclick="toggleNested('mapLayers', this, event)">▶</span>
           <input type="checkbox" id="investmentProperty" onclick="toggleCheckbox('mapLayers', this, event)">
-          <label for="investmentProperty">Investment Property</label>
+          <label for="investmentProperty">Properties</label>
         </div>
 
         <div id="mapLayers" class="nested">
           <div class="layer-item">
             <span class="toggle-btn" onclick="toggleNested('nonResidential', this, event)">▶</span>
             <input type="checkbox" id="nonResidentialLayer" onclick="toggleCheckbox('nonResidential', this, event)">
-            <label for="nonResidentialLayer">Non-Residential</label>
+            <label for="nonResidentialLayer">Park</label>
           </div>
           <div id="nonResidential" class="nested">
             <div class="layer-item">
               <input type="checkbox" id="nonResidentialBuildings" onclick="toggleCheckbox('', this, event)">
-              <label for="nonResidentialBuildings">Non-Residential Buildings</label>
+              <label for="nonResidentialBuildings">Urban Park</label>
             </div>
             <div class="layer-item">
               <input type="checkbox" id="nonResidentialPremises" onclick="toggleCheckbox('', this, event)">
-              <label for="nonResidentialPremises">Non-Residential Premises</label>
+              <label for="nonResidentialPremises">Panoramic Park</label>
             </div>
           </div>
 
           <div class="layer-item">
             <span class="toggle-btn" onclick="toggleNested('residential', this, event)">▶</span>
             <input type="checkbox" id="residentialLayer" onclick="toggleCheckbox('residential', this, event)">
-            <label for="residentialLayer">Residential</label>
+            <label for="residentialLayer">Historical Place</label>
           </div>
           <div id="residential" class="nested">
             <div class="layer-item">
               <input type="checkbox" id="apartmentsLayer" onclick="toggleCheckbox('', this, event)">
-              <label for="apartmentsLayer">Apartments</label>
+              <label for="apartmentsLayer">Medieval Architecture</label>
             </div>
             <div class="layer-item">
               <input type="checkbox" id="residentialGroup" onclick="toggleCheckbox('', this, event)">
-              <label for="residentialGroup">Residential</label>
+              <label for="residentialGroup">Religious Historical Site</label>
             </div>
             <div class="layer-item">
               <input type="checkbox" id="singleFamilyHouses" onclick="toggleCheckbox('', this, event)">
-              <label for="singleFamilyHouses">Single Family Houses</label>
+              <label for="singleFamilyHouses">Heritage Urban Area</label>
             </div>
           </div>
 
           <div class="layer-item">
             <span class="toggle-btn" onclick="toggleNested('lands', this, event)">▶</span>
             <input type="checkbox" id="landsLayer" onclick="toggleCheckbox('lands', this, event)">
-            <label for="landsLayer">Lands</label>
+            <label for="landsLayer">Cultural Building</label>
           </div>
           <div id="lands" class="nested">
             <div class="layer-item">
               <input type="checkbox" id="landsSubLayer" onclick="toggleCheckbox('', this, event)">
-              <label for="landsSubLayer">Lands</label>
+              <label for="landsSubLayer">Museum</label>
+            </div>
+            <div class="layer-item">
+              <input type="checkbox" id="performingArtsVenues" onclick="toggleCheckbox('', this, event)">
+              <label for="performingArtsVenues">Performing Arts Venue</label>
+            </div>
+            <div class="layer-item">
+              <input type="checkbox" id="culturalMemorialCenters" onclick="toggleCheckbox('', this, event)">
+              <label for="culturalMemorialCenters">Cultural &amp; Memorial Center</label>
             </div>
           </div>
 
@@ -251,12 +259,20 @@
             <span class="toggle-btn" onclick="toggleNested('propertyCompounds', this, event)">▶</span>
             <input type="checkbox" id="propertyCompoundsLayer"
               onclick="toggleCheckbox('propertyCompounds', this, event)">
-            <label for="propertyCompoundsLayer">Property Compounds</label>
+            <label for="propertyCompoundsLayer">Governmental Building</label>
           </div>
           <div id="propertyCompounds" class="nested">
             <div class="layer-item">
               <input type="checkbox" id="propertyCompoundsSubLayer" onclick="toggleCheckbox('', this, event)">
-              <label for="propertyCompoundsSubLayer">Property Compounds</label>
+              <label for="propertyCompoundsSubLayer">Executive Authoritie</label>
+            </div>
+            <div class="layer-item">
+              <input type="checkbox" id="ministries" onclick="toggleCheckbox('', this, event)">
+              <label for="ministries">Ministrie</label>
+            </div>
+            <div class="layer-item">
+              <input type="checkbox" id="judicialInstitutions" onclick="toggleCheckbox('', this, event)">
+              <label for="judicialInstitutions">Judicial Institution</label>
             </div>
           </div>
         </div><!-- /#mapLayers -->

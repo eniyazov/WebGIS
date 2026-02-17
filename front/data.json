@@ -1,0 +1,222 @@
+[
+  {
+    "special_co": "01",
+    "title": "Nizami Ganjavi Park (White City)",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "White City District, Baku, Azerbaijan",
+    "category": "Park",
+    "subcategory": "Urban Park",
+    "coord_point": null,
+    "geometry_coordinates": "{{{{49.89324213574491,40.38123310173505},{49.89664826319886,40.38163553880961}, {49.89671107354189,40.379860541121445}, {49.89605027104849,40.37975192865295}, {49.89614620225381,40.37938895921456}, {49.895111449702625,40.37916785146181}, {49.89500600139786,40.37806626502114}, {49.89339801325388,40.379456334473076}, {49.892680551735516,40.38091821083757}}}}"
+  },
+  {
+    "special_co": "02",
+    "title": "Central Park",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Tbilisi Avenue, Baku, Azerbaijan",
+    "category": "Park",
+    "subcategory": "Urban Park",
+    "coord_point": null,
+    "geometry_coordinates": "{{{{49.8225,40.3755},{49.8265,40.3755},{49.8270,40.3795},{49.8220,40.3798},{49.8225,40.3755}}}}"
+  },
+  {
+    "special_co": "03",
+    "title": "Highland Park",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Mehdi Huseyn Street, Baku, Azerbaijan",
+    "category": "Park",
+    "subcategory": "Panoramic Park",
+    "coord_point": null,
+    "geometry_coordinates": "{{{{49.8325,40.3585},{49.8375,40.3585},{49.8380,40.3625},{49.8320,40.3628},{49.8325,40.3585}}}}"
+  },
+  {
+    "special_co": "04",
+    "title": "Ganjlik Park",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Ahmadli District, Baku, Azerbaijan",
+    "category": "Park",
+    "subcategory": "Panoramic Park",
+    "coord_point": null,
+    "geometry_coordinates": "{{{{49.9615,40.3825},{49.9655,40.3825},{49.9660,40.3865},{49.9610,40.3868},{49.9615,40.3825}}}}"
+  },
+  {
+    "special_co": "05",
+    "title": "Sevgi Parkı",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Nasimi District, Baku, Azerbaijan",
+    "category": "Park",
+    "subcategory": "Panoramic Park",
+    "coord_point": null,
+    "geometry_coordinates": "{{{{49.8450,40.3835},{49.8485,40.3835},{49.8490,40.3865},{49.8445,40.3868},{49.8450,40.3835}}}}"
+  },
+  {
+    "special_co": "06",
+    "title": "Icherisheher (Old City)",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Icherisheher, Baku, Azerbaijan",
+    "category": "Historical Place",
+    "subcategory": "Heritage Urban Area",
+    "coord_point": null,
+    "geometry_coordinates": "{{{{49.8300,40.3640},{49.8400,40.3640},{49.8420,40.3715},{49.8285,40.3720},{49.8300,40.3640}}}}"
+  },
+  {
+    "special_co": "07",
+    "title": "Maiden Tower",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Icherisheher, Baku, Azerbaijan",
+    "category": "Historical Place",
+    "subcategory": "Medieval Architecture",
+    "coord_point": "{49.83710506956208,40.3661799090719}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "08",
+    "title": "Mardakan Castle",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Mardakan Settlement, Baku, Azerbaijan",
+    "category": "Historical Place",
+    "subcategory": "Medieval Architecture",
+    "coord_point": "{50.14070036851369,40.49214778988487}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "09",
+    "title": "Palace of the Shirvanshahs",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Icherisheher, Baku, Azerbaijan",
+    "category": "Historical Place",
+    "subcategory": "Medieval Architecture",
+    "coord_point": "{49.83305282618171,40.366666539561926}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "10",
+    "title": "Atashgah Fire Temple",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Surakhani District, Baku, Azerbaijan",
+    "category": "Historical Place",
+    "subcategory": "Religious Historical Site",
+    "coord_point": "{50.00917558570874, 40.41602756715538}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "11",
+    "title": "National Carpet Museum",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Mikayil Huseynov Avenue, Baku, Azerbaijan",
+    "category": "Cultural Building",
+    "subcategory": "Museum",
+    "coord_point": "{49.83585598385368,40.360060575814636}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "12",
+    "title": "Azerbaijan State Academic Opera and Ballet Theatre",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Nizami Street, Baku, Azerbaijan",
+    "category": "Cultural Building",
+    "subcategory": "Performing Arts Venue",
+    "coord_point": "{49.84548282568183, 40.37471873397407}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "13",
+    "title": "Heydar Aliyev Center",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Heydar Aliyev Avenue, Baku, Azerbaijan",
+    "category": "Cultural Building",
+    "subcategory": "Cultural & Memorial Center",
+    "coord_point": "{49.867836555018854, 40.39598008057018}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "14",
+    "title": "International Mugham Center",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Neftchilar Avenue, Baku, Azerbaijan",
+    "category": "Cultural Building",
+    "subcategory": "Cultural & Memorial Center",
+    "coord_point": "{49.83493925501763,40.36107284965159}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "15",
+    "title": "Martyrs’ Alley",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Mehdi Huseyn Street, Baku, Azerbaijan",
+    "category": "Cultural Building",
+    "subcategory": "Cultural & Memorial Center",
+    "coord_point": null,
+    "geometry_coordinates": "{{{{49.82625655631005,40.35759945212514}, {49.828332931165725,40.3557066591709}, {49.829342010534845,40.35542569318778}, {49.830092351604186,40.355519348645586}, {49.83026053149904,40.356184791573604}, {49.828429958028146, 40.35746143776821}, {49.827317383339114,40.35832402286417}}}}"
+  },
+  {
+    "special_co": "16",
+    "title": "Presidential Administration of Azerbaijan",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Istiglaliyyat Street, Baku, Azerbaijan",
+    "category": "Governmental Building",
+    "subcategory": "Executive Authority",
+    "coord_point": "{ 49.8301740791194,40.36376324545567}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "17",
+    "title": "Government House",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Neftchilar Avenue, Baku, Azerbaijan",
+    "category": "Governmental Building",
+    "subcategory": "Executive Authority",
+    "coord_point": "{49.85302815501798,40.37378919225428}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "18",
+    "title": "Ministry of Foreign Affairs",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Suleyman Rahimov Street, Baku, Azerbaijan",
+    "category": "Governmental Building",
+    "subcategory": "Ministry",
+    "coord_point": "{49.8325775685096,40.37756282976755}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "19",
+    "title": "Ministry of Internal Affairs",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Azerbaijan Avenue, Baku, Azerbaijan",
+    "category": "Governmental Building",
+    "subcategory": "Ministry",
+    "coord_point": "{49.83372328292822,40.37095427222621}",
+    "geometry_coordinates": null
+  },
+  {
+    "special_co": "20",
+    "title": "Supreme Court of the Republic of Azerbaijan",
+    "country": "Azerbaijan",
+    "city": "Baku",
+    "address": "Yusif Safarov street, Baku, Azerbaijan",
+    "category": "Governmental Building",
+    "subcategory": "Judicial Institution",
+    "coord_point": "{49.865003387088194,40.3812240211421}",
+    "geometry_coordinates": null
+  }
+]

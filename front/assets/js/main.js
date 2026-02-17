@@ -44,9 +44,57 @@
     }
   }
 
+  function parseCoordPoint(value) {
+    if (!value) return null;
+    if (Array.isArray(value) && value.length === 2) return value.map(Number);
+    if (typeof value !== "string") return null;
+    const nums = value.match(/-?\d+(?:\.\d+)?/g);
+    if (!nums || nums.length < 2) return null;
+    const lon = Number(nums[0]);
+    const lat = Number(nums[1]);
+    if (Number.isNaN(lon) || Number.isNaN(lat)) return null;
+    return [lon, lat];
+  }
+
+  function parseGeometryCoordinates(value) {
+    if (!value) return null;
+    if (Array.isArray(value)) return value;
+    if (typeof value !== "string") return null;
+    const nums = value.match(/-?\d+(?:\.\d+)?/g);
+    if (!nums || nums.length < 6) return null;
+    const coords = [];
+    for (let i = 0; i < nums.length - 1; i += 2) {
+      const lon = Number(nums[i]);
+      const lat = Number(nums[i + 1]);
+      if (Number.isNaN(lon) || Number.isNaN(lat)) continue;
+      coords.push([lon, lat]);
+    }
+    if (coords.length < 3) return null;
+    return [coords];
+  }
+
+  function normalizeDataItem(item) {
+    const normalized = { ...item };
+    normalized.coord_point = parseCoordPoint(item.coord_point);
+    normalized.geometry_coordinates = parseGeometryCoordinates(item.geometry_coordinates);
+    return normalized;
+  }
+
+  async function loadLocalData() {
+    if (localDataLoaded) return localData;
+    const data = await safeFetch(LOCAL_DATA_URL, { cache: "no-store" });
+    localData = Array.isArray(data) ? data.map(normalizeDataItem) : [];
+    localDataLoaded = true;
+    window.localData = localData;
+    return localData;
+  }
+
   const subcategoryColors = config.colors?.subcategory || {};
   const propertyTypeColors = config.colors?.propertyType || {};
-  const propertyMapping = config.propertyMapping || {};
+  const LOCAL_DATA_URL = "./data.json";
+  const LOCAL_DATA_MODE = true;
+  let localData = [];
+  let localDataLoaded = false;
 
   let esri = null;
   let map = null;
@@ -74,6 +122,23 @@
     $staticList;
 
   const handlers = [];
+  const layerFilters = {
+    nonResidentialLayer: { category: "Park" },
+    nonResidentialBuildings: { category: "Park", subcategory: "Urban Park" },
+    nonResidentialPremises: { category: "Park", subcategory: "Panoramic Park" },
+    residentialLayer: { category: "Historical Place" },
+    apartmentsLayer: { category: "Historical Place", subcategory: "Medieval Architecture" },
+    residentialGroup: { category: "Historical Place", subcategory: "Religious Historical Site" },
+    singleFamilyHouses: { category: "Historical Place", subcategory: "Heritage Urban Area" },
+    landsLayer: { category: "Cultural Building" },
+    landsSubLayer: { category: "Cultural Building", subcategory: "Museum" },
+    performingArtsVenues: { category: "Cultural Building", subcategory: "Performing Arts Venue" },
+    culturalMemorialCenters: { category: "Cultural Building", subcategory: "Cultural & Memorial Center" },
+    propertyCompoundsLayer: { category: "Governmental Building" },
+    propertyCompoundsSubLayer: { category: "Governmental Building", subcategory: "Executive Authority" },
+    ministries: { category: "Governmental Building", subcategory: "Ministry" },
+    judicialInstitutions: { category: "Governmental Building", subcategory: "Judicial Institution" }
+  };
 
   function cacheDom() {
     $searchInput = qs("#searchInput");
@@ -551,14 +616,23 @@
           $suggestList.style.display = "none";
           return;
         }
-        abortableFetch(`${API_BASE}/properties/search?query=${encodeURIComponent(text)}`, {
-          tag: "search"
-        })
-          .then((r) => {
-            if (!r.ok) throw new Error(`HTTP ${r.status}`);
-            return r.json();
+        loadLocalData()
+          .then((data) => {
+            const q = text.toLowerCase();
+            const list = data.filter((item) => {
+              const title = (item.title || item.title_by_document || item.project || "").toString().toLowerCase();
+              const address = (item.address || "").toString().toLowerCase();
+              const category = (item.category || "").toString().toLowerCase();
+              const subcategory = (item.subcategory || "").toString().toLowerCase();
+              return (
+                title.includes(q) ||
+                address.includes(q) ||
+                category.includes(q) ||
+                subcategory.includes(q)
+              );
+            });
+            renderSuggestions(list.slice(0, 20));
           })
-          .then((list) => renderSuggestions(list))
           .catch((err) => {
             if (err.name !== 'AbortError') {
               handleError(err, 'Axtarış');
@@ -585,7 +659,7 @@
       cb.checked = true;
     });
 
-    updateMapProperties();
+    loadLocalData().then(() => updateMapProperties());
   }
 
   function renderSuggestions(items) {
@@ -618,9 +692,10 @@
 
       // Handle null values: use title_by_document as fallback
       const specialCo = property.special_co ?? "";
-      const street = property.title_by_document;
+      const title = property.title || property.title_by_document || property.project || "Untitled";
+      const address = property.address || "";
 
-      li.textContent = `${specialCo} - ${street}`;
+      li.textContent = `${specialCo} - ${title}${address ? ` (${address})` : ""}`;
       Object.assign(li.style, {
         padding: "8px",
         cursor: "pointer",
@@ -658,26 +733,14 @@
       }
     });
 
-    updateMapProperties();
+    loadLocalData().then(() => updateMapProperties());
   }
 
   function preloadGroups() {
-    if (window.Loader) window.Loader.show();
-
-    fetch(`${API_BASE}/grouped-layers`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        buildGroupedLayerList(data);
-      })
-      .catch((err) => {
-        handleError(err, 'Qrupların yüklənməsi');
-      })
-      .finally(() => {
-        if (window.Loader) window.Loader.hide();
-      });
+    if (LOCAL_DATA_MODE) {
+      buildGroupedLayerList([]);
+      return;
+    }
   }
 
   // window-a əlavə et ki, handleFilterChange-dən çağırıla bilsin
@@ -887,22 +950,13 @@
 
     if (window.Loader) window.Loader.show();
 
-    const queryString = query.toString();
-    const apiUrl = queryString ? `${API_BASE}/properties?${queryString}` : `${API_BASE}/properties`;
-
-    fetch(apiUrl)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((filtered) => {
-        // Investment Property seçildikdə yalnız "Example GIS LLC" owner-ə sahib əmlakları göstər
-        let filteredData = filtered;
-        const hasInvestmentProperty = categories.includes("Investment Property");
-
-        if (hasInvestmentProperty) {
-          filteredData = filtered.filter(item =>
-            (item.owner || "").toString().trim() === "Example GIS LLC"
+    loadLocalData()
+      .then((data) => {
+        let filteredData = data;
+        if (categories.length > 0 || subcategories.length > 0) {
+          filteredData = data.filter(item =>
+            (subcategories.length > 0 && subcategories.includes(item.subcategory)) ||
+            (categories.length > 0 && categories.includes(item.category))
           );
         }
 
@@ -911,7 +965,6 @@
         if (window.initCustomTable) window.initCustomTable(filteredData);
         window.allTableData = filteredData;
 
-        // Ensure view is refreshed after adding graphics
         if (activeView && activeView.graphics && activeView.graphics.length > 0) {
           activeView.graphics.refresh();
         }
@@ -920,7 +973,6 @@
         handleError(err, 'Qruplandırılmış layer məlumatlarının yüklənməsi');
       })
       .finally(() => {
-        // Loading gizlət
         if (window.Loader) window.Loader.hide();
       });
   }
@@ -930,33 +982,41 @@
 
   function updateMapProperties() {
     const checkedIds = qsa(".layer-list input[type='checkbox']:checked").map((cb) => cb.id);
-    const selectedPropertyTypes = Object.keys(propertyMapping).filter((pt) =>
-      checkedIds.includes(propertyMapping[pt])
-    );
-    if (selectedPropertyTypes.length === 0) {
+    const selectedFilters = checkedIds.map((id) => layerFilters[id]).filter(Boolean);
+
+    if (selectedFilters.length === 0) {
+      // If only the top-level checkbox is selected, show everything
+      if (checkedIds.includes("investmentProperty")) {
+        loadLocalData().then((data) => {
+          renderProperties(data);
+          if (window.initCustomTable) window.initCustomTable(data);
+          window.allTableData = data;
+        });
+        return;
+      }
+
       activeView.graphics.removeAll();
       if (window.updateCustomTable) window.updateCustomTable([]);
       window.allTableData = [];
       return;
     }
 
-    const typesQuery = encodeURIComponent(selectedPropertyTypes.map(t => t.trim()).join(","));
+    const selectedCategories = new Set(
+      selectedFilters.filter((f) => f.category && !f.subcategory).map((f) => f.category)
+    );
+    const selectedSubcategories = new Set(
+      selectedFilters.filter((f) => f.subcategory).map((f) => f.subcategory)
+    );
 
-    // Loading göstər
     if (window.Loader) window.Loader.show();
 
-    fetch(`${API_BASE}/properties?propertyTypes=${typesQuery}`)
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
+    loadLocalData()
       .then((data) => {
-        // Investment Property seçildikdə yalnız "Example GIS LLC" owner-ə sahib əmlakları göstər
         let filteredData = data;
-
-        if (selectedPropertyTypes.includes("Investment Property")) {
-          filteredData = data.filter(item =>
-            (item.owner || "").toString().trim() === "Example GIS LLC"
+        if (selectedCategories.size > 0 || selectedSubcategories.size > 0) {
+          filteredData = data.filter((item) =>
+            (selectedSubcategories.size > 0 && selectedSubcategories.has(item.subcategory)) ||
+            (selectedCategories.size > 0 && selectedCategories.has(item.category))
           );
         }
 
@@ -964,14 +1024,12 @@
         if (window.initCustomTable) window.initCustomTable(filteredData);
         window.allTableData = filteredData;
 
-        // Ensure view is refreshed after adding graphics
         if (activeView && activeView.graphics && activeView.graphics.length > 0) {
           activeView.graphics.refresh();
         }
       })
       .catch((err) => handleError(err, 'Filtrlənmiş məlumatların yüklənməsi'))
       .finally(() => {
-        // Loading gizlət
         if (window.Loader) window.Loader.hide();
       });
   }
@@ -1033,7 +1091,9 @@
       const specialCoInt = p.special_co ? Math.floor(parseFloat(p.special_co)) : p.special_co;
 
       const attributes = {
-        Project: p.project,
+        Name: p.title || p.title_by_document || p.project,
+        Country: p.country,
+        Project: p.project || p.title,
         Owner: p.owner,
         Address: p.address,
         Value: p.book_value,
@@ -1097,7 +1157,7 @@
 
       // Popup template - 2 tab ilə
       const popupTemplate = {
-        title: "{Project}",
+        title: "{Name}",
         content: [
           {
             type: "custom",
@@ -1179,7 +1239,7 @@
               // Row 1: Owner and Code
               const row1 = document.createElement("div");
               row1.className = "popup-row";
-              const ownerBox = createFieldBox("Owner", attrs.Owner, "gradient-purple");
+              const ownerBox = createFieldBox("Name", attrs.Name, "gradient-purple");
               const codeBox = createFieldBox("Code", attrs.Special_co, "gradient-pink");
               if (ownerBox) row1.appendChild(ownerBox);
               if (codeBox) row1.appendChild(codeBox);
@@ -1222,7 +1282,7 @@
 
               // Şəkillər - Tab 1-ə əlavə et
               const buildingId = attrs.BuildingId;
-              if (buildingId) {
+              if (buildingId && !LOCAL_DATA_MODE) {
                 const imagesDiv = document.createElement("div");
                 imagesDiv.innerHTML = "<p style='color: #666; font-size: 12px; text-align: center; padding: 10px;'>⏳ Şəkillər yüklənir...</p>";
                 tab1Content.appendChild(imagesDiv);
@@ -1351,6 +1411,11 @@
                     console.error("Rəsim yüklənməsi xətası:", err);
                     imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Rəsim yoxdur</p>";
                   });
+              }
+              if (buildingId && LOCAL_DATA_MODE) {
+                const imagesDiv = document.createElement("div");
+                imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Demo: Şəkillər deaktivdir</p>";
+                tab1Content.appendChild(imagesDiv);
               }
 
               container.appendChild(tab1Content);

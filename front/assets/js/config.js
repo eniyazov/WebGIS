@@ -41,6 +41,17 @@
         Foton: { color: [255, 105, 180, 0.7], outline: "#ff69b4" },
         Top: { color: [0, 191, 255, 0.7], outline: "#00bfff" },
         Attached: { color: [255, 140, 0, 0.7], outline: "#c8c8c8e1" },
+        "Urban Park": { color: [34, 139, 34, 0.65], outline: "#1f7a1f" },
+        "Panoramic Park": { color: [46, 139, 87, 0.65], outline: "#2e8b57" },
+        "Medieval Architecture": { color: [139, 69, 19, 0.65], outline: "#8b4513" },
+        "Religious Historical Site": { color: [75, 0, 130, 0.65], outline: "#4b0082" },
+        "Heritage Urban Area": { color: [205, 92, 92, 0.65], outline: "#cd5c5c" },
+        Museum: { color: [70, 130, 180, 0.65], outline: "#4682b4" },
+        "Performing Arts Venue": { color: [255, 140, 0, 0.65], outline: "#ff8c00" },
+        "Cultural & Memorial Center": { color: [72, 61, 139, 0.65], outline: "#483d8b" },
+        "Executive Authority": { color: [0, 100, 0, 0.65], outline: "#006400" },
+        Ministry: { color: [0, 128, 128, 0.65], outline: "#008080" },
+        "Judicial Institution": { color: [128, 0, 0, 0.65], outline: "#800000" },
         "null": { color: [128, 128, 128, 0.5], outline: "#808080" } // Null/boş subcategory üçün
       },
 

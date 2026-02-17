@@ -91,6 +91,8 @@ function showNotification(message, type = 'info') {
 }
 
 const columns = [
+  { group: "Place", label: "Name", key: "title", sortType: "string" },
+  { group: "Place", label: "Country", key: "country", sortType: "string" },
   { group: "Address details", label: "Owner", key: "owner", sortType: "string" },
   { group: "Address details", label: "Special Code", key: "special_co", sortType: "string" },
   { group: "Address details", label: "Project", key: "project", sortType: "string" },
@@ -220,7 +222,7 @@ function getVisibleColumnsForData(data) {
   if (isTopFotonOnly) {
     // Return TOP/Foton columns - use columns that exist in the columns array
     const topFotonKeys = [
-      "address", "property_type", "special_co", "owner", "category", "subcategory",
+      "title", "country", "address", "property_type", "special_co", "owner", "category", "subcategory",
       "title_by_document", "project", "region", "city", "street", "valuation_category",
       "book_value", "use_type", "lease_status", "nolease_reason", "ownership_right", "status_x",
       "property_use_type", "rent_opera", "legal_property_ownership_type", "legal_land_ownership_type",
@@ -236,7 +238,7 @@ function getVisibleColumnsForData(data) {
 
   // Default to investment_property columns - use columns that exist in the columns array
   const investmentPropertyKeys = [
-    "address", "property_type", "special_co", "owner", "category", "subcategory",
+    "title", "country", "address", "property_type", "special_co", "owner", "category", "subcategory",
     "title_by_document", "project", "region", "city", "street", "valuation_category",
     "book_value", "use_type", "lease_status", "nolease_reason", "ownership_right", "status_x",
     "property_use_type", "rent_opera", "legal_property_ownership_type", "legal_land_ownership_type",
@@ -274,6 +276,8 @@ function initCustomTable(data) {
       return value !== null && value !== undefined && value !== "" && value !== "null";
     });
   });
+  // Exclude geometry fields from table
+  visibleColumns = visibleColumns.filter(colKey => colKey !== "coord_point" && colKey !== "geometry_coordinates");
 
   scrollIndex = 0;
   selectedRows.clear();
@@ -347,6 +351,8 @@ function updateCustomTable(filteredData) {
       return value !== null && value !== undefined && value !== "" && value !== "null";
     });
   });
+  // Exclude geometry fields from table
+  visibleColumns = visibleColumns.filter(colKey => colKey !== "coord_point" && colKey !== "geometry_coordinates");
 
   scrollIndex = 0;
   selectedRows.clear();
