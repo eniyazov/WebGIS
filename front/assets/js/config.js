@@ -23,24 +23,6 @@
     // Rəng sxemləri
     colors: {
       subcategory: {
-        Building: { color: [128, 0, 0, 0.7], outline: "#800000" },
-        Land: { color: [102, 51, 0, 0.5], outline: "#663300" },
-        "Mixed use": { color: [16, 48, 94, 0.6], outline: "#10305e" },
-        Office: { color: [66, 135, 245, 0.7], outline: "#4287f5" },
-        "Parking Building": { color: [102, 0, 204, 0.7], outline: "#6600cc" },
-        "Parking space": { color: [160, 160, 160, 0.7], outline: "#a0a0a0" },
-        Residential: { color: [215, 25, 28, 0.6], outline: "#d7191c" },
-        "Single Family Houses": { color: [128, 0, 64, 0.7], outline: "#800040" },
-        "Street Retail": { color: [0, 100, 255, 0.7], outline: "#0064ff" },
-        Unit: { color: [107, 142, 35, 0.7], outline: "#6b8e23" },
-        Warehouse: { color: [18, 165, 133, 0.7], outline: "#0f6f59" },
-        Hotel: { color: [0, 128, 0, 0.7], outline: "#008000" }, //green
-        Apartments: { color: [153, 50, 204, 0.7], outline: "#9932cc" },
-        Cip: { color: [100, 100, 0, 0.7], outline: "#646400" },
-        Pitstop: { color: [70, 130, 180, 0.7], outline: "#4682b4" },
-        Foton: { color: [255, 105, 180, 0.7], outline: "#ff69b4" },
-        Top: { color: [0, 191, 255, 0.7], outline: "#00bfff" },
-        Attached: { color: [255, 140, 0, 0.7], outline: "#c8c8c8e1" },
         "Urban Park": { color: [34, 139, 34, 0.65], outline: "#1f7a1f" },
         "Panoramic Park": { color: [46, 139, 87, 0.65], outline: "#2e8b57" },
         "Medieval Architecture": { color: [139, 69, 19, 0.65], outline: "#8b4513" },
@@ -51,8 +33,7 @@
         "Cultural & Memorial Center": { color: [72, 61, 139, 0.65], outline: "#483d8b" },
         "Executive Authority": { color: [0, 100, 0, 0.65], outline: "#006400" },
         Ministry: { color: [0, 128, 128, 0.65], outline: "#008080" },
-        "Judicial Institution": { color: [128, 0, 0, 0.65], outline: "#800000" },
-        "null": { color: [128, 128, 128, 0.5], outline: "#808080" } // Null/boş subcategory üçün
+        "Judicial Institution": { color: [128, 0, 0, 0.65], outline: "#800000" }
       },
 
       propertyType: {
