@@ -92,167 +92,18 @@ function showNotification(message, type = 'info') {
 
 const columns = [
   { group: "Place", label: "Name", key: "title", sortType: "string" },
+  { group: "Place", label: "Special Code", key: "special_co", sortType: "string" },
   { group: "Place", label: "Country", key: "country", sortType: "string" },
-  { group: "Address details", label: "Owner", key: "owner", sortType: "string" },
-  { group: "Address details", label: "Special Code", key: "special_co", sortType: "string" },
-  { group: "Address details", label: "Project", key: "project", sortType: "string" },
-  { group: "Address details", label: "Title by Document", key: "title_by_document", sortType: "string" },
-  { group: "Address details", label: "Region", key: "region", sortType: "string" },
-  { group: "Address details", label: "City", key: "city", sortType: "string" },
-  { group: "Address details", label: "Street", key: "street", sortType: "string" },
-  { group: "Address details", label: "Address", key: "address", sortType: "string" },
-  { group: "Building details", label: "Category", key: "category", sortType: "string" },
-  { group: "Building details", label: "Subcategory", key: "subcategory", sortType: "string" },
-  { group: "Building details", label: "Valuation Category", key: "valuation_category", sortType: "string" },
-  { group: "Building details", label: "Property Type", key: "property_type", sortType: "string" },
-  { group: "Building details", label: "Use Type", key: "use_type", sortType: "string" },
-  { group: "Building details", label: "Lease Status", key: "lease_status", sortType: "string" },
-  { group: "Building details", label: "No Lease Reason", key: "nolease_reason", sortType: "string" },
-  { group: "Building details", label: "Ownership Right", key: "ownership_right", sortType: "string" },
-  { group: "Building details", label: "Status X", key: "status_x", sortType: "string" },
-  { group: "Building details", label: "Property Use Type", key: "property_use_type", sortType: "string" },
-  { group: "Building details", label: "Rent Operant", key: "rent_opera", sortType: "string" },
-  { group: "Building details", label: "Legal Property Ownership", key: "legal_property_ownership_type", sortType: "string" },
-  { group: "Building details", label: "Legal Land Ownership", key: "legal_land_ownership_type", sortType: "string" },
-  { group: "Building details", label: "Property Ownership Type", key: "property_ownership_type", sortType: "string" },
-  { group: "Building details", label: "Land Ownership Type", key: "land_ownership_type", sortType: "string" },
-
-  { group: "Land & Area Info", label: "Total Area (m²)", key: "total_area", sortType: "numeric" },
-  { group: "Land & Area Info", label: "Lease Area", key: "lease_area", sortType: "numeric" },
-  { group: "Land & Area Info", label: "Land Area (ha)", key: "land_area", sortType: "numeric" },
-  { group: "Land & Area Info", label: "Actual Land Area", key: "actual_land_area", sortType: "numeric" },
-  { group: "Land & Area Info", label: "Tenant Business Area", key: "tenant_business_area", sortType: "numeric" },
-
-  { group: "Registration & Legal", label: "Property Registry No", key: "property_registry_no", sortType: "string" },
-  { group: "Registration & Legal", label: "Registration No", key: "registration_no", sortType: "string" },
-  { group: "Registration & Legal", label: "Serial No", key: "serial_no", sortType: "string" },
-  { group: "Registration & Legal", label: "Technical Passport Registry No", key: "technical_pasport_registry_no", sortType: "string" },
-  { group: "Registration & Legal", label: "Registration Date", key: "registration_date", sortType: "string" },
-  { group: "Registration & Legal", label: "Property Use Classification", key: "property_use_classification", sortType: "string" },
-
-  { group: "Lease Info", label: "Land Lease Start Date", key: "land_lease_start_date", sortType: "string" },
-  { group: "Lease Info", label: "Land Lease End Date", key: "land_lease_end_date", sortType: "string" },
-  { group: "Lease Info", label: "Lease Duration", key: "lease_duration", sortType: "numeric" },
-  { group: "Lease Info", label: "Monthly Rent", key: "monthly_rent", sortType: "numeric" },
-  { group: "Lease Info", label: "Lessor Party", key: "lessor_party", sortType: "string" },
-
-  { group: "Valuation", label: "Book Value", key: "book_value", sortType: "numeric" },
-  { group: "Valuation", label: "Valuation Method", key: "valuation_method", sortType: "string" },
-  { group: "Valuation", label: "Prior Year Valuation 2023", key: "prior_year_valuation_results_2023", sortType: "numeric" },
-  { group: "Valuation", label: "Current Year Valuation 2024", key: "current_year_valuation_resluts_2024", sortType: "numeric" },
-  { group: "Valuation", label: "Variance", key: "variance", sortType: "numeric" },
-
-  { group: "Attachments", label: "Attachment Title Deed", key: "attachment_title_deed", sortType: "string" },
-  { group: "Attachments", label: "Attachment Technical Passport", key: "attachment_technical_pasport", sortType: "string" },
-  { group: "Attachments", label: "Attachment Other", key: "attachemnt_other", sortType: "string" },
-  { group: "Coordinates", label: "Coordinate from Technical Passport", key: "coordinate_technical_pasport", sortType: "string" },
-
-  { group: "Strategy", label: "Date Added to Portfolio", key: "date_added_portfel", sortType: "string" },
-  { group: "Strategy", label: "Strategic Recommendation", key: "strategic_recomendation", sortType: "string" },
-  { group: "Strategy", label: "Recommended Use", key: "recomended_use", sortType: "string" },
-  { group: "Strategy", label: "Perspective Stage", key: "perspective_stage", sortType: "string" },
-  { group: "Strategy", label: "Phase", key: "phase", sortType: "string" },
-  { group: "Strategy", label: "Status Y", key: "status_y", sortType: "string" },
-
-  { group: "Other", label: "Year", key: "year", sortType: "numeric" },
-  { group: "Other", label: "Quarter", key: "quarter", sortType: "numeric" },
-  { group: "Other", label: "Note", key: "note", sortType: "string" },
-  { group: "Other", label: "Notes", key: "notes", sortType: "string" },
-  { group: "Other", label: "Type", key: "type", sortType: "string" },
-
-  // CIP-specific columns
-  { group: "CIP Details", label: "CIP No", key: "cip_no", sortType: "string" },
-  { group: "CIP Details", label: "Design (m²)", key: "des_m", sortType: "numeric" },
-  { group: "CIP Details", label: "Development (m²)", key: "dev_m", sortType: "numeric" },
-  { group: "CIP Details", label: "TC (m²)", key: "tc_m", sortType: "numeric" },
-  { group: "CIP Details", label: "RIBA Stage", key: "riba_stage", sortType: "string" },
-  { group: "CIP Details", label: "Project Code", key: "project_code", sortType: "string" },
-  { group: "CIP Details", label: "Feasibility", key: "feasibility", sortType: "string" },
-  { group: "CIP Details", label: "Preconcept", key: "preconcept", sortType: "string" },
-  { group: "CIP Details", label: "Detailed Feasibility", key: "detailed_feasibility", sortType: "string" },
-  { group: "CIP Details", label: "Final Concept", key: "final_concept", sortType: "string" },
-  { group: "CIP Details", label: "Urban Planning Justification", key: "urban_planning_justification", sortType: "string" },
-  { group: "CIP Details", label: "Detailed Design", key: "detailed_design", sortType: "string" },
-  { group: "CIP Details", label: "Technical Design", key: "technical_design", sortType: "string" },
-  { group: "CIP Details", label: "Construction Permit", key: "construction_permit", sortType: "string" },
-  { group: "CIP Details", label: "Sales & Leasing Start", key: "sales_and_leasing_start", sortType: "string" },
-  { group: "CIP Details", label: "Construction Start", key: "construction_start", sortType: "string" },
-  { group: "CIP Details", label: "Construction Finish", key: "construction_finish", sortType: "string" },
-  { group: "CIP Details", label: "Estimated Finish", key: "estimated_finish", sortType: "string" },
-  { group: "CIP Details", label: "Handover", key: "handover", sortType: "string" }
-];
-
-// CIP layer üçün xüsusi sütunlar
-const cipColumns = [
-  "special_co", "category", "title_by_document", "project", "cip_no",
-  "des_m", "dev_m", "tc_m", "riba_stage", "project_code",
-  "feasibility", "preconcept", "detailed_feasibility", "final_concept",
-  "urban_planning_justification", "detailed_design", "technical_design",
-  "construction_permit", "sales_and_leasing_start", "construction_start",
-  "construction_finish", "estimated_finish", "handover"
+  { group: "Place", label: "City", key: "city", sortType: "string" },
+  { group: "Place", label: "Address", key: "address", sortType: "string" },
+  { group: "Place", label: "Category", key: "category", sortType: "string" },
+  { group: "Place", label: "Subcategory", key: "subcategory", sortType: "string" }
 ];
 
 // Get visible columns based on data category
 function getVisibleColumnsForData(data) {
   if (data.length === 0) return columns.map(col => col.key);
-
-  // Check first item's category/subcategory
-  const firstItem = data[0];
-  const category = (firstItem.category || "").toString().trim();
-  const subcategory = (firstItem.subcategory || "").toString().trim();
-
-  // Check if all items are CIP
-  const isCipOnly = data.every(item => {
-    const subcat = (item.subcategory || "").toString().toLowerCase();
-    const cat = (item.category || "").toString().toLowerCase();
-    return subcat === "cip" || cat === "cip";
-  });
-
-  if (isCipOnly) {
-    return cipColumns;
-  }
-
-  // Check if all items are TOP/Foton
-  const isTopFotonOnly = data.every(item => {
-    const subcat = (item.subcategory || "").toString().toLowerCase();
-    const cat = (item.category || "").toString().toLowerCase();
-    return subcat === "top" || subcat === "foton" || cat === "top" || cat === "foton";
-  });
-
-  if (isTopFotonOnly) {
-    // Return TOP/Foton columns - use columns that exist in the columns array
-    const topFotonKeys = [
-      "title", "country", "address", "property_type", "special_co", "owner", "category", "subcategory",
-      "title_by_document", "project", "region", "city", "street", "valuation_category",
-      "book_value", "use_type", "lease_status", "nolease_reason", "ownership_right", "status_x",
-      "property_use_type", "rent_opera", "legal_property_ownership_type", "legal_land_ownership_type",
-      "property_ownership_type", "land_ownership_type", "total_area", "lease_area", "land_area",
-      "property_registry_no", "registration_no", "serial_no", "technical_pasport_registry_no",
-      "registration_date", "property_use_classification", "land_lease_start_date", "land_lease_end_date",
-      "lease_duration", "monthly_rent", "lessor_party",
-      "attachment_title_deed", "attachment_technical_pasport", "attachemnt_other",
-      "coordinate_technical_pasport"
-    ];
-    return topFotonKeys.filter(key => columns.some(col => col.key === key));
-  }
-
-  // Default to investment_property columns - use columns that exist in the columns array
-  const investmentPropertyKeys = [
-    "title", "country", "address", "property_type", "special_co", "owner", "category", "subcategory",
-    "title_by_document", "project", "region", "city", "street", "valuation_category",
-    "book_value", "use_type", "lease_status", "nolease_reason", "ownership_right", "status_x",
-    "property_use_type", "rent_opera", "legal_property_ownership_type", "legal_land_ownership_type",
-    "property_ownership_type", "land_ownership_type", "total_area", "lease_area", "land_area",
-    "property_registry_no", "registration_no", "serial_no", "technical_pasport_registry_no",
-    "registration_date", "property_use_classification", "land_lease_start_date", "land_lease_end_date",
-    "lease_duration", "monthly_rent", "lessor_party",
-    "attachment_title_deed", "attachment_technical_pasport", "attachemnt_other",
-    "coordinate_technical_pasport", "prior_year_valuation_results_2023", "current_year_valuation_resluts_2024",
-    "variance", "valuation_method", "notes", "actual_land_area", "tenant_business_area",
-    "date_added_portfel", "strategic_recomendation", "recomended_use", "perspective_stage", "phase",
-    "status_y", "year", "quarter", "note"
-  ];
-  return investmentPropertyKeys.filter(key => columns.some(col => col.key === key));
+  return columns.map(col => col.key);
 }
 
 function initCustomTable(data) {

@@ -44,6 +44,15 @@
     }
   }
 
+  const subcategoryColors = config.colors?.subcategory || {};
+  const propertyTypeColors = config.colors?.propertyType || {};
+  const LOCAL_DATA_URL = "./data.json";
+  const LOCAL_DATA_MODE = true;
+  let localData = [];
+  let localDataLoaded = false;
+  let imageIndex = null;
+  let imageIndexLoaded = false;
+
   function parseCoordPoint(value) {
     if (!value) return null;
     if (Array.isArray(value) && value.length === 2) return value.map(Number);
@@ -89,12 +98,16 @@
     return localData;
   }
 
-  const subcategoryColors = config.colors?.subcategory || {};
-  const propertyTypeColors = config.colors?.propertyType || {};
-  const LOCAL_DATA_URL = "./data.json";
-  const LOCAL_DATA_MODE = true;
-  let localData = [];
-  let localDataLoaded = false;
+  async function loadImageIndex() {
+    if (imageIndexLoaded) return imageIndex || {};
+    try {
+      imageIndex = await safeFetch("./property_images/index.json", { cache: "no-store" });
+    } catch (e) {
+      imageIndex = {};
+    }
+    imageIndexLoaded = true;
+    return imageIndex || {};
+  }
 
   let esri = null;
   let map = null;
@@ -1100,6 +1113,7 @@
         Subcategory: p.subcategory,
         Use_type: p.property_use_type,
         Special_co: specialCoInt,
+        Special_coRaw: p.special_co != null ? String(p.special_co).trim() : "",
         Total_area: p.total_area,
         Land_area_: p.land_area,
         BuildingId: p.id || specialCoInt, // Resim API'si üçün building ID
@@ -1282,11 +1296,125 @@
 
               // Şəkillər - Tab 1-ə əlavə et
               const buildingId = attrs.BuildingId;
-              if (buildingId && !LOCAL_DATA_MODE) {
-                const imagesDiv = document.createElement("div");
-                imagesDiv.innerHTML = "<p style='color: #666; font-size: 12px; text-align: center; padding: 10px;'>⏳ Şəkillər yüklənir...</p>";
-                tab1Content.appendChild(imagesDiv);
+              const imageKey = (attrs.Special_coRaw || "").trim() || String(attrs.Special_co || "").trim();
 
+              const renderImageGrid = (images, basePath) => {
+                if (!images || images.length === 0) {
+                  return "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Şəkil yoxdur</p>";
+                }
+                const grid = document.createElement("div");
+                grid.style.cssText = "display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;";
+
+                images.forEach((img, imgIndex) => {
+                  const imgWrapper = document.createElement("div");
+                  imgWrapper.style.cssText = "position: relative; overflow: hidden; border-radius: 6px; background: #f0f0f0;";
+
+                  const imgEl = document.createElement("img");
+                  imgEl.src = `${basePath}/${img}`;
+                  imgEl.alt = img;
+                  imgEl.style.cssText = "width: 100%; height: 120px; object-fit: cover; cursor: pointer; transition: transform 0.2s;";
+                  imgEl.title = img;
+
+                  imgEl.onmouseover = () => imgEl.style.transform = "scale(1.05)";
+                  imgEl.onmouseout = () => imgEl.style.transform = "scale(1)";
+
+                  imgEl.onclick = (e) => {
+                    e.stopPropagation();
+                    let currentIndex = imgIndex;
+
+                    const modal = document.createElement("div");
+                    modal.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 10000;";
+
+                    const container = document.createElement("div");
+                    container.style.cssText = "position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;";
+
+                    const modalImg = document.createElement("img");
+                    modalImg.style.cssText = "max-width: 85%; max-height: 85%; border-radius: 8px; object-fit: contain;";
+
+                    const infoDiv = document.createElement("div");
+                    infoDiv.style.cssText = "position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 6px; font-size: 14px; white-space: nowrap;";
+
+                    const updateImage = (index) => {
+                      if (index >= 0 && index < images.length) {
+                        currentIndex = index;
+                        modalImg.src = `${basePath}/${images[index]}`;
+                        infoDiv.textContent = `${currentIndex + 1} / ${images.length}`;
+                      }
+                    };
+
+                    const prevBtn = document.createElement("button");
+                    prevBtn.textContent = "❮";
+                    prevBtn.style.cssText = "position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; transition: background 0.2s; z-index: 10001;";
+                    prevBtn.onmouseover = () => prevBtn.style.background = "rgba(255,255,255,0.5)";
+                    prevBtn.onmouseout = () => prevBtn.style.background = "rgba(255,255,255,0.3)";
+                    prevBtn.onclick = () => updateImage(currentIndex - 1);
+
+                    const nextBtn = document.createElement("button");
+                    nextBtn.textContent = "❯";
+                    nextBtn.style.cssText = "position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; transition: background 0.2s; z-index: 10001;";
+                    nextBtn.onmouseover = () => nextBtn.style.background = "rgba(255,255,255,0.5)";
+                    nextBtn.onmouseout = () => nextBtn.style.background = "rgba(255,255,255,0.3)";
+                    nextBtn.onclick = () => updateImage(currentIndex + 1);
+
+                    const closeBtn = document.createElement("button");
+                    closeBtn.textContent = "✕";
+                    closeBtn.style.cssText = "position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.3); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 24px; font-weight: bold; transition: background 0.2s; z-index: 10001;";
+                    closeBtn.onmouseover = () => closeBtn.style.background = "rgba(255,255,255,0.5)";
+                    closeBtn.onmouseout = () => closeBtn.style.background = "rgba(255,255,255,0.3)";
+                    closeBtn.onclick = () => modal.remove();
+
+                    const handleKeyPress = (e) => {
+                      if (e.key === "ArrowLeft") updateImage(currentIndex - 1);
+                      if (e.key === "ArrowRight") updateImage(currentIndex + 1);
+                      if (e.key === "Escape") modal.remove();
+                    };
+                    document.addEventListener("keydown", handleKeyPress);
+
+                    const originalRemove = modal.remove.bind(modal);
+                    modal.remove = function() {
+                      document.removeEventListener("keydown", handleKeyPress);
+                      originalRemove();
+                    };
+
+                    container.appendChild(prevBtn);
+                    container.appendChild(modalImg);
+                    container.appendChild(nextBtn);
+                    container.appendChild(infoDiv);
+                    container.appendChild(closeBtn);
+                    modal.appendChild(container);
+                    modal.onclick = (e) => e.target === modal && modal.remove();
+                    document.body.appendChild(modal);
+
+                    updateImage(currentIndex);
+                  };
+
+                  imgWrapper.appendChild(imgEl);
+                  grid.appendChild(imgWrapper);
+                });
+
+                return grid;
+              };
+
+              const imagesDiv = document.createElement("div");
+              imagesDiv.innerHTML = "<p style='color: #666; font-size: 12px; text-align: center; padding: 10px;'>⏳ Şəkillər yüklənir...</p>";
+              tab1Content.appendChild(imagesDiv);
+
+              if (LOCAL_DATA_MODE) {
+                loadImageIndex()
+                  .then((idx) => {
+                    imagesDiv.innerHTML = "";
+                    const files = (idx && imageKey && idx[imageKey]) ? idx[imageKey] : [];
+                    const gridOrMsg = renderImageGrid(files, `./property_images/${imageKey}`);
+                    if (typeof gridOrMsg === "string") {
+                      imagesDiv.innerHTML = gridOrMsg;
+                    } else {
+                      imagesDiv.appendChild(gridOrMsg);
+                    }
+                  })
+                  .catch(() => {
+                    imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Şəkil yoxdur</p>";
+                  });
+              } else if (buildingId) {
                 fetch(`${API_BASE}/images/${buildingId}`)
                   .then(res => {
                     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1294,128 +1422,19 @@
                   })
                   .then(data => {
                     imagesDiv.innerHTML = "";
-
-                    if (!data.images || data.images.length === 0) {
-                      imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Şəkil yoxdur</p>";
-                      return;
+                    const files = (data && data.images) ? data.images.map(i => i.filename || i.url) : [];
+                    const gridOrMsg = renderImageGrid(files, API_BASE);
+                    if (typeof gridOrMsg === "string") {
+                      imagesDiv.innerHTML = gridOrMsg;
+                    } else {
+                      imagesDiv.appendChild(gridOrMsg);
                     }
-
-                    // Rəsim başlığı
-                    const title = document.createElement("h4");
-                    title.textContent = `Şəkillər (${data.totalImages || data.images.length})`;
-                    title.style.cssText = "margin: 0 0 10px 0; font-size: 13px; color: #333;";
-                    imagesDiv.appendChild(title);
-
-                    // Rəsim grid'i
-                    const grid = document.createElement("div");
-                    grid.style.cssText = "display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;";
-
-                    data.images.forEach((img, imgIndex) => {
-                      const imgWrapper = document.createElement("div");
-                      imgWrapper.style.cssText = "position: relative; overflow: hidden; border-radius: 6px; background: #f0f0f0;";
-
-                      const imgEl = document.createElement("img");
-                      imgEl.src = `${API_BASE}${img.url}`;
-                      imgEl.alt = img.filename;
-                      imgEl.style.cssText = "width: 100%; height: 120px; object-fit: cover; cursor: pointer; transition: transform 0.2s;";
-                      imgEl.title = img.filename;
-
-                      // Hover effekti
-                      imgEl.onmouseover = () => imgEl.style.transform = "scale(1.05)";
-                      imgEl.onmouseout = () => imgEl.style.transform = "scale(1)";
-
-                      // Klik edəndə slide göstərişi
-                      imgEl.onclick = (e) => {
-                        e.stopPropagation();
-                        let currentIndex = imgIndex;
-
-                        const modal = document.createElement("div");
-                        modal.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 10000;";
-
-                        const container = document.createElement("div");
-                        container.style.cssText = "position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;";
-
-                        const modalImg = document.createElement("img");
-                        modalImg.style.cssText = "max-width: 85%; max-height: 85%; border-radius: 8px; object-fit: contain;";
-
-                        const infoDiv = document.createElement("div");
-                        infoDiv.style.cssText = "position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 6px; font-size: 14px; white-space: nowrap;";
-
-                        const updateImage = (index) => {
-                          if (index >= 0 && index < data.images.length) {
-                            currentIndex = index;
-                            modalImg.src = `${API_BASE}${data.images[index].url}`;
-                            infoDiv.textContent = `${currentIndex + 1} / ${data.images.length}`;
-                          }
-                        };
-
-                        // Əvvəlki rəsim düyməsi
-                        const prevBtn = document.createElement("button");
-                        prevBtn.textContent = "❮";
-                        prevBtn.style.cssText = "position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; transition: background 0.2s; z-index: 10001;";
-                        prevBtn.onmouseover = () => prevBtn.style.background = "rgba(255,255,255,0.5)";
-                        prevBtn.onmouseout = () => prevBtn.style.background = "rgba(255,255,255,0.3)";
-                        prevBtn.onclick = () => updateImage(currentIndex - 1);
-
-                        // Sonrakı rəsim düyməsi
-                        const nextBtn = document.createElement("button");
-                        nextBtn.textContent = "❯";
-                        nextBtn.style.cssText = "position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; transition: background 0.2s; z-index: 10001;";
-                        nextBtn.onmouseover = () => nextBtn.style.background = "rgba(255,255,255,0.5)";
-                        nextBtn.onmouseout = () => nextBtn.style.background = "rgba(255,255,255,0.3)";
-                        nextBtn.onclick = () => updateImage(currentIndex + 1);
-
-                        // Bağla düyməsi
-                        const closeBtn = document.createElement("button");
-                        closeBtn.textContent = "✕";
-                        closeBtn.style.cssText = "position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.3); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 24px; font-weight: bold; transition: background 0.2s; z-index: 10001;";
-                        closeBtn.onmouseover = () => closeBtn.style.background = "rgba(255,255,255,0.5)";
-                        closeBtn.onmouseout = () => closeBtn.style.background = "rgba(255,255,255,0.3)";
-                        closeBtn.onclick = () => modal.remove();
-
-                        // Klaviatura navigasiyası
-                        const handleKeyPress = (e) => {
-                          if (e.key === "ArrowLeft") updateImage(currentIndex - 1);
-                          if (e.key === "ArrowRight") updateImage(currentIndex + 1);
-                          if (e.key === "Escape") modal.remove();
-                        };
-                        document.addEventListener("keydown", handleKeyPress);
-
-                        // Modal bağlandıqda event listener'ı sil
-                        const originalRemove = modal.remove.bind(modal);
-                        modal.remove = function() {
-                          document.removeEventListener("keydown", handleKeyPress);
-                          originalRemove();
-                        };
-
-                        container.appendChild(prevBtn);
-                        container.appendChild(modalImg);
-                        container.appendChild(nextBtn);
-                        container.appendChild(infoDiv);
-                        container.appendChild(closeBtn);
-                        modal.appendChild(container);
-                        modal.onclick = (e) => e.target === modal && modal.remove();
-                        document.body.appendChild(modal);
-
-                        // İlk rəsimi göstər
-                        updateImage(currentIndex);
-                      };
-
-                      imgWrapper.appendChild(imgEl);
-                      grid.appendChild(imgWrapper);
-                    });
-
-                    imagesDiv.appendChild(grid);
                   })
-                  .catch(err => {
-                    console.error("Rəsim yüklənməsi xətası:", err);
-                    imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Rəsim yoxdur</p>";
+                  .catch(() => {
+                    imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Şəkil yoxdur</p>";
                   });
-              }
-              if (buildingId && LOCAL_DATA_MODE) {
-                const imagesDiv = document.createElement("div");
-                imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Demo: Şəkillər deaktivdir</p>";
-                tab1Content.appendChild(imagesDiv);
+              } else {
+                imagesDiv.innerHTML = "<p style='color: #999; font-size: 12px; text-align: center; padding: 15px; margin: 0;'>📷 Şəkil yoxdur</p>";
               }
 
               container.appendChild(tab1Content);
